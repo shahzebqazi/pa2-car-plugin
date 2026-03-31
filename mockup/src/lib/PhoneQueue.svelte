@@ -14,7 +14,7 @@
 <div class="phone-shell">
   <FrameLabel
     label="Phone — PA2 theme"
-    note="P3 queue: read-mostly; reorder primarily on phone (G9). Handle height ~45dp pattern from theme docs."
+    note="Up-next list: expect people to read it in the car; drag-to-reorder is a phone job."
   />
   <div class="screen">
     <div class="handle-bar" aria-hidden="true">

@@ -6,8 +6,6 @@
   import AutoNowPlaying from './lib/AutoNowPlaying.svelte'
   import AutoBrowseRoot from './lib/AutoBrowseRoot.svelte'
   import AutoErrorState from './lib/AutoErrorState.svelte'
-  import CarAppLibraryBrowse from './lib/CarAppLibraryBrowse.svelte'
-  import CarAppLibraryNowPlaying from './lib/CarAppLibraryNowPlaying.svelte'
   import HomePage from './lib/HomePage.svelte'
   import DesignSystemPage from './lib/DesignSystemPage.svelte'
   import ResearchPage from './lib/ResearchPage.svelte'
@@ -16,15 +14,13 @@
   import type { MockupFrameId } from './lib/screen-ids'
 
   const frames: { id: MockupFrameId; label: string }[] = [
-    { id: 'phone-np', label: 'P0 · Phone — PA2 · Now playing' },
-    { id: 'auto-np', label: 'P0 · Auto — host media · Now playing' },
-    { id: 'phone-browse', label: 'P1 · Phone — PA2 · Browse root' },
-    { id: 'auto-browse', label: 'P1 · Auto — host media · Browse root' },
-    { id: 'phone-error', label: 'P2 · Phone — PA2 · Error' },
-    { id: 'auto-error', label: 'P2 · Auto — host media · Error' },
-    { id: 'phone-queue', label: 'P3 · Phone — PA2 · Queue' },
-    { id: 'dhu-browse', label: 'Sandbox — Car App Library · Browse (mock)' },
-    { id: 'dhu-np', label: 'Sandbox — Car App Library · Now playing (mock)' },
+    { id: 'phone-np', label: 'P0 · Phone · Now playing' },
+    { id: 'auto-np', label: 'P0 · Car screen · Now playing' },
+    { id: 'phone-browse', label: 'P1 · Phone · Library' },
+    { id: 'auto-browse', label: 'P1 · Car screen · Library' },
+    { id: 'phone-error', label: 'P2 · Phone · Can’t connect' },
+    { id: 'auto-error', label: 'P2 · Car screen · Can’t connect' },
+    { id: 'phone-queue', label: 'P3 · Phone · Up next' },
   ]
 
   let route = $state<AppRoute>(parseHash(typeof window !== 'undefined' ? window.location.hash : ''))
@@ -41,11 +37,7 @@
 
   const carDisplayActive = $derived(
     route.name === 'mockup' &&
-      (route.frame === 'auto-np' ||
-        route.frame === 'auto-browse' ||
-        route.frame === 'auto-error' ||
-        route.frame === 'dhu-browse' ||
-        route.frame === 'dhu-np'),
+      (route.frame === 'auto-np' || route.frame === 'auto-browse' || route.frame === 'auto-error'),
   )
 
   function setMockupFrame(id: MockupFrameId) {
@@ -61,17 +53,16 @@
   <ResearchPage {route} />
 {:else if route.name === 'mockup'}
   <div class="app-layout" class:layout-car={carDisplayActive}>
-    <aside class="nav" aria-label="Mockup screens">
+    <aside class="nav" aria-label="Mockup list">
       <div class="nav-top">
         <SiteNav {route} />
       </div>
-      <h1 class="app-title">PA2 × Android Auto mockup</h1>
+      <h1 class="app-title">Screen mockups</h1>
       <p class="app-lead">
-        Frames follow <strong>AGENTS.md</strong> and
-        <code>docs/ux-research/08-mockup-handoff-package.md</code>:
-        <strong>Phone — PA2 theme</strong> (Nunito + tokens),
-        <strong>Auto — host media (PA2)</strong> (generic host chrome, no PA2 hex),
-        <strong>Sandbox — Car App Library</strong> (Svelte template mocks; DHU PNGs in <code>public/dhu/</code> kept for reference, not embedded here).
+        <strong>Phone</strong> uses the Power Ampache 2 look (Nunito and theme colors from the design docs).
+        <strong>Car</strong> is a rough stand-in for Android Auto: the system draws most of the chrome, so these grays
+        are intentional, not a bug. Priorities P0–P3 match
+        <code>docs/ux-research/08-mockup-handoff-package.md</code>.
       </p>
       <nav class="chips" aria-label="Mockup frames">
         {#each frames as f}
@@ -86,9 +77,9 @@
         {/each}
       </nav>
       <p class="dhu-note">
-        <strong>DHU</strong> exercises the Kotlin <code>androidx.car.app</code> sample on a device or emulator.
-        Reference captures live in <code>public/dhu/</code>; these two sandbox frames are drawn mockups instead of
-        embedded screenshots.
+        The <strong>Desktop Head Unit</strong> runs the real Kotlin sample app from this repo (not this website).
+        The hero image on the home page is an optional screenshot from that setup; see <code>mockup/README.md</code>
+        if you want to refresh it.
       </p>
     </aside>
 
@@ -107,10 +98,6 @@
         <AutoBrowseRoot />
       {:else if route.frame === 'auto-error'}
         <AutoErrorState />
-      {:else if route.frame === 'dhu-browse'}
-        <CarAppLibraryBrowse />
-      {:else if route.frame === 'dhu-np'}
-        <CarAppLibraryNowPlaying />
       {/if}
     </main>
   </div>

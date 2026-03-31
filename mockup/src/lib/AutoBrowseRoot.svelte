@@ -13,7 +13,7 @@
 <div class="auto-shell">
   <FrameLabel
     label="Auto — host media (PA2)"
-    note="P1 root browse (happy path ≤2 steps). Generic list chrome; short spoken-friendly labels (G6–G7). App supplies row text — header is host/app root title, not PA2-themed chrome."
+    note="Same library idea as the phone mockup, in plain car list form. Row text comes from the app; the shell owns the header and styling."
   />
   <div class="auto-screen">
     <aside class="dock" aria-label="App shortcuts (host chrome)">

@@ -1,20 +1,19 @@
 # Power Ampache 2 × Android Auto — UI mockup
 
-Disposable **Svelte + Vite** browser prototype for **P0–P3** scenarios from [`docs/ux-research/08-mockup-handoff-package.md`](../docs/ux-research/08-mockup-handoff-package.md), aligned with root [`AGENTS.md`](../AGENTS.md) (frame labelling, phone player direction, Auto vs sandbox).
+**Svelte + Vite** browser preview for **P0–P3** flows in [`docs/ux-research/08-mockup-handoff-package.md`](../docs/ux-research/08-mockup-handoff-package.md). Same labelling ideas as root [`AGENTS.md`](../AGENTS.md).
 
 ## What this is
 
-| Frame label | Styling |
-|-------------|---------|
+| Kind | Styling |
+|------|---------|
 | **Phone — PA2 theme** | Nunito + colors from [`docs/design-system/01-brand-and-language.md`](../docs/design-system/01-brand-and-language.md) |
-| **Auto — host media (PA2)** | Generic list / now-playing pattern (system fonts, neutral chrome). Real Android Auto does **not** use PA2 hex or Nunito on the media path. |
-| **Sandbox — Car App Library** | Svelte template **mockups** (`CarAppLibraryBrowse`, `CarAppLibraryNowPlaying`). **`public/dhu/*.png`** stays in the repo for DHU reference / home hero, not embedded in those two frames. Not PA2 shipping Auto UI. |
+| **Auto — host media (PA2)** | Plain list / now-playing layout (neutral chrome). Real Android Auto does **not** use PA2 colors or Nunito. |
 
-Screens include **P3** phone queue (read-mostly) and **P2** generic Auto error wireframe. Phone now-playing uses **`public/pa2/placeholder-album.svg`** (converted from PA2 `app/.../drawable/placeholder_album.xml`, tint `onSurfaceVariant`) for zoom-fill backdrop + foreground art — no external image URLs.
+There is **no** extra “sandbox template” row in the mockup app anymore: **Car App Library** behaviour is exercised in **Kotlin** under `app/src/main/.../car/` and, if you like, in the **Desktop Head Unit**. Optional **`public/dhu/*.png`** shots support the **home** page hero and side-by-side checks — not duplicate Svelte frames.
 
-**Typography:** Nunito is loaded from **`public/fonts/Nunito-Variable.ttf`** (OFL, `public/fonts/OFL.txt`); `index.html` does not use Google Fonts or other CDNs.
+Phone now-playing uses **`public/pa2/placeholder-album.svg`** (from PA2 `placeholder_album` artwork) for backdrop + art — no remote images.
 
-The runnable **Car App Library** surface is the Kotlin sample under `app/src/main/.../car/`; the mockup’s sandbox frames **approximate** that flow in the browser while DHU PNGs remain optional reference assets.
+**Typography:** **`public/fonts/Nunito-Variable.ttf`** (OFL in `public/fonts/OFL.txt`); no Google Fonts CDN in `index.html`.
 
 ## Run the mockup (browser)
 

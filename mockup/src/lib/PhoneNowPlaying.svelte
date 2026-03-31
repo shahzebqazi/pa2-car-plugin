@@ -9,7 +9,7 @@
 <div class="phone-shell">
   <FrameLabel
     label="Phone — PA2 theme"
-    note="P0: Nunito + PA2 tokens; backdrop = current track art (cover, blur, scrim); standard seek bar (wave-style scrub exploration is on Auto — host media mockup); 48dp-class targets; reduced-motion tones down art hover only."
+    note="Now playing on the phone: blurred cover art behind the UI, normal seek bar, comfortably large controls. The wavy scrub idea is only on the car mockup."
   />
   <div class="screen">
     <div class="bg-stack" aria-hidden="true">
@@ -61,7 +61,7 @@
             <span class="time">4:03</span>
           </div>
         </div>
-        <p class="scrub-hint">Drag horizontally to seek (phone gesture target)</p>
+        <p class="scrub-hint">Drag sideways on the bar to seek</p>
       </div>
 
       <div class="transport">
@@ -70,7 +70,7 @@
         <button type="button" class="ctrl secondary hit-52" aria-label="Next track">⏭</button>
       </div>
 
-      <p class="resume-hint">P0 resume: last playlist · ≤1 browse step from root on Auto (see Auto browse mockup)</p>
+      <p class="resume-hint">Resume: on the car, “continue listening” should be at most one tap from the library root.</p>
     </div>
   </div>
 </div>

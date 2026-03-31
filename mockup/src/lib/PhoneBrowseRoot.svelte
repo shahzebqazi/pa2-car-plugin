@@ -14,7 +14,7 @@
 <div class="phone-shell">
   <FrameLabel
     label="Phone — PA2 theme"
-    note="P1 root browse: playlists + recents; ≤2 steps happy path (G6). Voice play (“Play playlist X”) is session-side on device (P1). Ellipsis long titles (G7). Nunito + PA2 tokens."
+    note="Library root: put resume and recents up top; keep paths to start playback short. Long titles should ellipsize, not wrap forever."
   />
   <div class="screen">
     <header class="top">

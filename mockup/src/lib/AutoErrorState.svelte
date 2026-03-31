@@ -5,7 +5,7 @@
 <div class="auto-shell">
   <FrameLabel
     label="Auto — host media (PA2)"
-    note="P2 error wireframe: one short sentence + recovery (G8). Actual copy/layout from host after MediaSession error reporting."
+    note="Same spirit as the phone error screen. Wording and layout in production follow what MediaSession reports and what the host shows."
   />
   <div class="auto-screen">
     <div class="panel">

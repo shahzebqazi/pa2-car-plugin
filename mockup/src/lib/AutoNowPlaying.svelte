@@ -5,7 +5,7 @@
 <div class="auto-shell">
   <FrameLabel
     label="Auto — host media (PA2)"
-    note="P0 wireframe: system chrome; generic grays (no PA2 hex in real projection). Organic wave + bar scrub (AGENTS.md visual anchor) shown as exploratory host-adjacent mock — actual AA scrub is OEM-dependent; reduced-motion disables wave motion only."
+    note="Rough idea of now playing in the car: gray chrome, not PA2 brand colors. The wave behind the scrubber is experimental; real Android Auto depends on the car maker."
   />
   <div class="auto-screen">
     <div class="np">

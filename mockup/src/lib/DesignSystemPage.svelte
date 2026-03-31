@@ -25,11 +25,10 @@
 <div class="page">
   <header class="page-header">
     <SiteNav {route} />
-    <h1 class="page-title">Design system · phone (PowerAmpache2Theme)</h1>
+    <h1 class="page-title">Design system (phone)</h1>
     <p class="page-lead">
-      Android Auto media UI does not use PA2 hex or Nunito — the head unit paints chrome. Phone
-      surfaces use Material 3 roles below (see
-      <code>docs/design-system/01-brand-and-language.md</code>).
+      Colors and type below match PowerAmpache2Theme. They do not apply to Android Auto’s media UI — the car host
+      applies its own look. See <code>docs/design-system/01-brand-and-language.md</code> for the full write-up.
     </p>
   </header>
 
@@ -38,10 +37,10 @@
       <h2 id="type-heading" class="sr-only">Typography</h2>
       <div class="type-sample">
         <h3 class="type-label">Typography</h3>
-        <p class="type-display">Nunito — display rhythm</p>
+        <p class="type-display">Nunito</p>
         <p class="type-body">
-          Variable font from <code>public/fonts/</code> (OFL). Material 3 slots in the theme module
-          map to Nunito for labels through display sizes.
+          Variable font served from <code>public/fonts/</code> (OFL in <code>public/fonts/OFL.txt</code>). The Android
+          theme wires Material 3 text styles to these faces.
         </p>
       </div>
     </section>

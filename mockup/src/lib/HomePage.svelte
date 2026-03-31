@@ -13,7 +13,7 @@
       {#if !heroFailed}
         <img
           src={heroSrc}
-          alt="Desktop Head Unit: Android Auto now playing (sandbox sample)"
+          alt="Android Auto now playing, captured from the Desktop Head Unit while running this repo’s sample app"
           class="hero-img"
           width="1920"
           height="1080"
@@ -24,8 +24,8 @@
       {:else}
         <div class="hero-fallback">
           <p>
-            Add <code>mockup/public/dhu/dhu-now-playing.png</code> (DHU <code>screenshot</code>). Served via
-            Vite’s public folder for local dev and GitHub Pages.
+            Drop a capture at <code>mockup/public/dhu/dhu-now-playing.png</code> if you want the photo here (from the
+            DHU <code>screenshot</code> command — see <code>mockup/README.md</code>).
           </p>
         </div>
       {/if}
@@ -34,13 +34,14 @@
     <h1 class="title">Power Ampache 2 × Android Auto</h1>
 
     <p class="overview">
-      Sandbox workspace for a <strong>Car App Library</strong> Kotlin sample, <strong>browser mockups</strong>
-      (phone PA2 theme, host media, sandbox templates), and <strong>UX / design docs</strong>. Production PA2
-      uses Media3 on the car; these frames are labelled for review — open the links below to explore.
+      This folder is a small browser preview for <strong>Power Ampache 2</strong> on the phone and in the car. The
+      Android app in <code>app/</code> is a separate Kotlin sample (Car App Library); shipping PA2 uses
+      <strong>Media3</strong>, and the car UI you see in production is drawn by Android Auto. Use the links below for
+      mockups and the design and research notes under <code>docs/</code>.
     </p>
 
     <nav class="nav" aria-label="Site sections">
-      <a class="nav-btn primary" href="#/mockup">Mockup frames</a>
+      <a class="nav-btn primary" href="#/mockup">Mockups</a>
       <a class="nav-btn" href="#/design">Design system</a>
       <a class="nav-btn" href="#/research">UX research</a>
       <a

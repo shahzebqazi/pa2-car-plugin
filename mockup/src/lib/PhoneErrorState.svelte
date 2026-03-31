@@ -5,7 +5,7 @@
 <div class="phone-shell">
   <FrameLabel
     label="Phone — PA2 theme"
-    note="P2 error: one short neutral sentence + retry (G8). Server / account changes default to parked or phone (G10)."
+    note="When the server is unreachable: one clear sentence and a single retry. Deeper fixes (accounts, settings) belong on the phone or when parked."
   />
   <div class="screen">
     <header class="top">

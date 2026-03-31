@@ -7,8 +7,6 @@ export type MockupFrameId =
   | 'auto-np'
   | 'auto-browse'
   | 'auto-error'
-  | 'dhu-browse'
-  | 'dhu-np'
 
 export const MOCKUP_FRAMES: readonly MockupFrameId[] = [
   'phone-np',
@@ -18,8 +16,6 @@ export const MOCKUP_FRAMES: readonly MockupFrameId[] = [
   'phone-error',
   'auto-error',
   'phone-queue',
-  'dhu-browse',
-  'dhu-np',
 ] as const
 
 export function isMockupFrameId(s: string): s is MockupFrameId {

@@ -16,25 +16,25 @@
     {
       title: 'Executive summary',
       blurb:
-        'Evidence-oriented baseline for driver-safe music on Android Auto: PA2 uses Media3 MediaSessionService; play/pause, skip, and resume are the critical low-load tasks; phone UI uses PowerAmpache2Theme while Auto chrome is host-rendered.',
+        'Short read on what matters in the car: play, pause, skip, and getting back to what you were listening to. Phone UI follows the PA2 theme; Android Auto draws its own chrome around your media session.',
       docPath: 'docs/ux-research/00-executive-summary.md',
     },
     {
       title: 'Platform & synthesis',
       blurb:
-        'Sandbox Car App Library prototypes must be labelled separately from shipping PA2. Research favors progressive disclosure: shallow car browse and recents/playlists first; deep Ampache trees primarily on phone, with voice for specific requests.',
+        'How this sandbox sample differs from real Power Ampache 2, and why the car should stay shallow (recents, playlists first) while heavier browsing stays on the phone or voice.',
       docPath: 'docs/ux-research/07-research-synthesis.md',
     },
     {
       title: 'Tasks & patterns',
       blurb:
-        'Task analysis (T1–T3) and a pattern table map mainstream music-on-Auto behaviour to PA2 features so engineering and QA focus on what drivers actually do behind the wheel.',
+        'Walkthrough of common tasks and which screens they hit, so build and test time goes to behaviour drivers actually use.',
       docPath: 'docs/ux-research/02-task-analysis-and-flows.md',
     },
     {
-      title: 'Safety, a11y & handoff',
+      title: 'Safety, accessibility, mockups',
       blurb:
-        'Google Play car quality and distraction safeguards are the binding gates; the accessibility matrix separates phone TalkBack from host-owned Auto semantics. Mockup priorities live in the handoff package.',
+        'Play policy, distraction constraints, and how a11y differs between phone and head unit. The mockup checklist (P0–P3) lives here.',
       docPath: 'docs/ux-research/08-mockup-handoff-package.md',
     },
   ]
@@ -43,11 +43,9 @@
 <div class="page">
   <header class="page-header">
     <SiteNav {route} />
-    <h1 class="page-title">UX research · docs showcase</h1>
+    <h1 class="page-title">UX research</h1>
     <p class="page-lead">
-      Summaries from the Android Auto + PA2 research phase. Open files from the
-      <strong>repository root</strong> in your editor (paths below are relative to
-      <code>android-auto/</code>).
+      Pointers into the markdown in this repo. Paths are from the <strong>project root</strong> (<code>android-auto/</code>).
     </p>
   </header>
 
