@@ -35,7 +35,7 @@ Use the clone for upstream branches and PRs; use this root for experiments, mock
 
 After each push to `main`, [`.github/workflows/deploy-github-pages.yml`](.github/workflows/deploy-github-pages.yml) builds `mockup/` and deploys the static site to **GitHub Pages** (project site):
 
-**https://shahzebqazi.github.io/pa2-car-plugin/**
+**https://sqazi.sh/pa2-car-plugin/** (canonical; `https://shahzebqazi.github.io/pa2-car-plugin/` redirects here if your account uses this domain for Pages)
 
 Use `cd mockup && npm run dev` locally (assets use base `/`). CI sets `VITE_BASE_PATH=/pa2-car-plugin` so production assets resolve under that path.
 
