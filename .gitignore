@@ -1,0 +1,33 @@
+# Gradle
+.gradle/
+build/
+**/build/
+local.properties
+
+# Android
+*.apk
+*.aab
+*.ap_
+captures/
+.externalNativeBuild/
+.cxx/
+
+# IDE
+.idea/
+*.iml
+.DS_Store
+.cursor/
+
+# Kotlin
+.kotlin/
+
+# Testing / coverage
+*.exec
+jacoco/
+
+# Keystore (never commit)
+*.jks
+*.keystore
+
+# Nested upstream clone (separate git repo). Remove if you track it via submodule.
+Power-Ampache-2/
