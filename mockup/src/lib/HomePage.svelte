@@ -1,5 +1,6 @@
 <script lang="ts">
   import { publicUrl } from './public-url'
+  import { SANDBOX_REPO_URL } from './repo-url'
 
   let heroFailed = $state(false)
 
@@ -42,6 +43,11 @@
       <a class="nav-btn primary" href="#/mockup">Mockup frames</a>
       <a class="nav-btn" href="#/design">Design system</a>
       <a class="nav-btn" href="#/research">UX research</a>
+      <a
+        class="nav-btn nav-external"
+        href={SANDBOX_REPO_URL}
+        target="_blank"
+        rel="noreferrer">GitHub repo</a>
     </nav>
   </main>
 </div>
@@ -172,5 +178,14 @@
   .nav-btn:focus-visible {
     outline: 2px solid var(--pa2-tertiary);
     outline-offset: 3px;
+  }
+
+  .nav-external {
+    border-style: dashed;
+  }
+
+  .nav-external:hover {
+    border-color: var(--pa2-tertiary);
+    color: var(--pa2-tertiary);
   }
 </style>

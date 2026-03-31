@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { AppRoute } from './hash-routes'
+  import { SANDBOX_REPO_URL } from './repo-url'
 
   interface Props {
     route: AppRoute
@@ -21,6 +22,8 @@
   <a class={navClass('research')} href="#/research">Research</a>
   <span class="sep" aria-hidden="true">·</span>
   <a class={navClass('mockup')} href="#/mockup">Mockup frames</a>
+  <span class="sep" aria-hidden="true">·</span>
+  <a class="nav-link nav-external" href={SANDBOX_REPO_URL} target="_blank" rel="noreferrer">GitHub</a>
 </nav>
 
 <style>
@@ -57,5 +60,15 @@
   .sep {
     color: var(--mock-chrome-border);
     user-select: none;
+  }
+
+  .nav-external {
+    color: var(--pa2-tertiary);
+  }
+
+  .nav-external:hover {
+    color: var(--pa2-on-surface);
+    text-decoration: underline;
+    text-underline-offset: 2px;
   }
 </style>
