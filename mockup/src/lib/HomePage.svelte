@@ -34,15 +34,16 @@
     <h1 class="title">Power Ampache 2 × Android Auto</h1>
 
     <p class="overview">
-      This folder is a small browser preview for <strong>Power Ampache 2</strong> on the phone and in the car. The
-      Android app in <code>app/</code> is a separate Kotlin sample (Car App Library); shipping PA2 uses
-      <strong>Media3</strong>, and the car UI you see in production is drawn by Android Auto. Use the links below for
-      mockups and the design and research notes under <code>docs/</code>.
+      UX research, browser mockups, and a Kotlin <strong>Car App Library</strong> sample under <code>app/</code> for
+      experiments. <strong>Production Power Ampache 2</strong> on Android Auto is <strong>host-rendered media</strong>
+      via <strong>Media3</strong> (session, browse tree, metadata) — not custom car templates. The
+      <a class="overview-link" href="#/design">Auto design</a> page states what engineers implement versus what lives on
+      the phone only.
     </p>
 
     <nav class="nav" aria-label="Site sections">
       <a class="nav-btn primary" href="#/mockup">Mockups</a>
-      <a class="nav-btn" href="#/design">Design system</a>
+      <a class="nav-btn" href="#/design">Auto design</a>
       <a class="nav-btn" href="#/research">UX research</a>
       <a
         class="nav-btn nav-external"
@@ -133,6 +134,23 @@
   .overview strong {
     color: var(--pa2-on-surface);
     font-weight: 600;
+  }
+
+  .overview-link {
+    color: var(--pa2-tertiary);
+    font-weight: 600;
+    text-decoration: underline;
+    text-underline-offset: 2px;
+  }
+
+  .overview-link:hover {
+    color: var(--pa2-primary);
+  }
+
+  .overview-link:focus-visible {
+    outline: 2px solid var(--pa2-tertiary);
+    outline-offset: 2px;
+    border-radius: 4px;
   }
 
   .nav {

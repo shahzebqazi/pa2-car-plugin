@@ -1,6 +1,8 @@
-# UX/UI research — document index
+# UX and UI research — document index
 
-Living index for the Android Auto + Power Ampache 2 research phase. Update **Last reviewed** when a brief changes.
+These notes support **Power Ampache 2 on Android Auto** and the **handheld** app. They focus on **what drivers need**, **platform limits**, and **how phone branding differs from host-rendered car media**.
+
+The **mockup** site (`mockup/`) embeds some of the same Markdown for browsing; the **source of truth** is always the files under `docs/`. Update **Last reviewed** when a brief changes materially.
 
 | # | Document | Purpose | Last reviewed |
 |---|----------|---------|---------------|
@@ -13,7 +15,7 @@ Living index for the Android Auto + Power Ampache 2 research phase. Update **Las
 | 05 | [05-design-guardrails-checklist.md](05-design-guardrails-checklist.md) | Reviewable checklist (source vs assumption) | 2026-03-30 |
 | 06 | [06-accessibility-matrix.md](06-accessibility-matrix.md) | Phone vs projected UI | 2026-03-30 |
 | 07 | [07-research-synthesis.md](07-research-synthesis.md) | Full synthesis + tradeoffs | 2026-03-30 |
-| 08 | [08-mockup-handoff-package.md](08-mockup-handoff-package.md) | Prioritized scenarios for mockups / Kotlin | 2026-03-30 |
+| 08 | [08-mockup-handoff-package.md](08-mockup-handoff-package.md) | P0–P3 scenarios, mockup labels, Media3 checklist | 2026-03-30 |
 
 **Related:** [android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md) (original phased plan), [design system](../design-system/00-design-system-index.md).
 

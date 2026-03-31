@@ -9,7 +9,7 @@
 - **Secondary tasks** (visual, manual, cognitive) compete with driving; music apps are lower risk than visual search or messaging but **browse depth** and **manual entry** still matter.
 - **Google** enforces **distraction safeguards** and **Play quality** rules for car media apps; these are **hard constraints** for shipping ([Implement distraction safeguards](https://developer.android.com/training/cars/media/distraction-safeguards), [App quality for cars](https://developer.android.com/docs/quality-guidelines/car-app-quality)).
 - **NHTSA** publishes **driver-distraction** research and (separately) **visual-manual** task guidance; use the **specific guideline revision** you cite—do not treat the general [distracted-driving hub](https://www.nhtsa.gov/research-data/distracted-driving) as if it were one numbered rule set. NHTSA material is **not** a substitute for OEM certification or Google Play review.
-- **Design response:** Prefer **shallow hierarchies**, **voice** for search, **predictable now-playing controls**, and **minimal metadata** while moving ([android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md) §2).
+- **Design response:** Prefer **shallow hierarchies**, **voice** for search, **predictable now-playing controls**, and **minimal metadata** while moving ([android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md), design response section).
 
 ---
 

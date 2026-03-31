@@ -50,7 +50,7 @@ This document reconciles phases **A–D** into one narrative and calls out **tra
 3. **Lyrics** on Auto: disabled in motion vs OEM-dependent?
 4. **Classical** deep hierarchy: acceptable exception with voice?
 
-## 8. Risks (from research plan §11)
+## 8. Risks (from research plan, risk section)
 
 | Risk | Status |
 |------|--------|
@@ -59,7 +59,7 @@ This document reconciles phases **A–D** into one narrative and calls out **tra
 | a11y = more on-screen text | Mitigated by matrix + guardrails |
 | DHU ≠ road | Documented; real-HU spot checks still needed |
 
-## 9. Handoff
+## 9. Next documents
 
-- Mockup / Kotlin priorities: [08-mockup-handoff-package.md](08-mockup-handoff-package.md)
-- Visual tokens: [../design-system/appendix-pa2-theme-inventory.md](../design-system/appendix-pa2-theme-inventory.md)
+- Mockup priorities and engineering checklist: [08-mockup-handoff-package.md](08-mockup-handoff-package.md)
+- Phone theme file map: [../design-system/appendix-pa2-theme-inventory.md](../design-system/appendix-pa2-theme-inventory.md)

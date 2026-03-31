@@ -2,17 +2,23 @@
 
 This design system follows the structure in [99designs — What does a design system consist of?](https://99designs.com/blog/tips/design-systems/): **branding and design language**, **layout and navigation**, **components and patterns**, plus **implementation** notes.
 
+## Android Auto vs the phone app (read this first)
+
+On **Android Auto**, the **head unit** draws browse lists, now playing, and transport controls. The app does **not** skin that UI with Power Ampache colors or Nunito. Integration work is **Media3**: a reliable `MediaSession`, a sensible `MediaItem` tree, accurate metadata and artwork, voice actions, and error reporting, within [Google’s car media](https://developer.android.com/training/cars/media) and distraction rules.
+
+**Phone** surfaces use **PowerAmpache2Theme** (Nunito, Material 3 tokens, optional dynamic color). That is the scope of the token tables in this folder.
+
 ## Goals
 
-- Give designers and developers a **single map** from **brand tokens** to **surfaces**.
-- Separate what applies to the **phone app** (Power Ampache 2 + **PowerAmpache2Theme**) from what applies to **Android Auto** (**host-rendered** media UI for PA2’s `MediaBrowserService` path).
+- Give designers and engineers one place to see how **brand tokens** map to **surfaces**.
+- Keep **phone** (PA2 + PowerAmpache2Theme) separate from **Android Auto** (host-rendered media for the app’s media-browser integration).
 - Stay aligned with UX research: [../ux-research/README.md](../ux-research/README.md).
 
 ## Audience
 
-- Android / Compose engineers (PA2 + plugins)
-- Mockup and marketing contributors
-- Car integration engineers (browse tree, session, metadata — not pixel theme)
+- Android and Compose engineers working on the handheld app
+- Engineers integrating **Media3** / Android Auto (session, browse tree, metadata — not car pixel theme)
+- Anyone building browser mockups or marketing screenshots
 
 ## Source of truth
 

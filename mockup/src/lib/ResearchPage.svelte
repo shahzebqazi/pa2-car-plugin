@@ -1,5 +1,7 @@
 <script lang="ts">
+  import './md-prose.css'
   import SiteNav from './SiteNav.svelte'
+  import { researchSections } from './research-docs'
   import type { AppRoute } from './hash-routes'
 
   interface Props {
@@ -7,37 +9,6 @@
   }
 
   let { route }: Props = $props()
-
-  const researchHighlights: {
-    title: string
-    blurb: string
-    docPath: string
-  }[] = [
-    {
-      title: 'Executive summary',
-      blurb:
-        'Short read on what matters in the car: play, pause, skip, and getting back to what you were listening to. Phone UI follows the PA2 theme; Android Auto draws its own chrome around your media session.',
-      docPath: 'docs/ux-research/00-executive-summary.md',
-    },
-    {
-      title: 'Platform & synthesis',
-      blurb:
-        'How this sandbox sample differs from real Power Ampache 2, and why the car should stay shallow (recents, playlists first) while heavier browsing stays on the phone or voice.',
-      docPath: 'docs/ux-research/07-research-synthesis.md',
-    },
-    {
-      title: 'Tasks & patterns',
-      blurb:
-        'Walkthrough of common tasks and which screens they hit, so build and test time goes to behaviour drivers actually use.',
-      docPath: 'docs/ux-research/02-task-analysis-and-flows.md',
-    },
-    {
-      title: 'Safety, accessibility, mockups',
-      blurb:
-        'Play policy, distraction constraints, and how a11y differs between phone and head unit. The mockup checklist (P0–P3) lives here.',
-      docPath: 'docs/ux-research/08-mockup-handoff-package.md',
-    },
-  ]
 </script>
 
 <div class="page">
@@ -45,29 +16,40 @@
     <SiteNav {route} />
     <h1 class="page-title">UX research</h1>
     <p class="page-lead">
-      Pointers into the markdown in this repo. Paths are from the <strong>project root</strong> (<code>android-auto/</code>).
+      Summaries and checklists for Android Auto behaviour, driver tasks, and how they map to Power Ampache 2. Expand a
+      section to read it in full. Links between Markdown files resolve in the repo; if a link target is missing here,
+      open the file under <code>docs/ux-research/</code> from the project root.
     </p>
   </header>
 
   <main class="page-main">
-    <ul class="cards">
-      {#each researchHighlights as h}
-        <li class="card">
-          <h2 class="card-title">{h.title}</h2>
-          <p class="card-blurb">{h.blurb}</p>
-          <p class="card-path"><code>{h.docPath}</code></p>
+    <ul class="card-list">
+      {#each researchSections as s (s.id)}
+        <li class="card-item">
+          <details class="card-details">
+            <summary class="card-summary">
+              <span class="summary-row">
+                <span class="card-title">{s.title}</span>
+                <span class="chevron" aria-hidden="true"></span>
+              </span>
+              <span class="card-blurb">{s.blurb}</span>
+              <span class="source-path"><code>{s.sourcePath}</code></span>
+            </summary>
+            <div class="md-prose doc-html" role="region" aria-label="Full document: {s.title}">
+              {@html s.html}
+            </div>
+          </details>
         </li>
       {/each}
     </ul>
     <p class="doc-hint">
-      Full index: <code>docs/ux-research/README.md</code> · Plan:
+      Index: <code>docs/ux-research/README.md</code> · Plan:
       <code>docs/android-auto-ux-research-plan.md</code> ·
       <a
         class="ext"
         href="https://developer.android.com/training/cars/media"
         rel="noreferrer"
-        target="_blank">Create audio media apps (Android for Cars)</a
-      >
+        target="_blank">Create audio media apps (Android for Cars)</a>
     </p>
   </main>
 </div>
@@ -76,7 +58,7 @@
   .page {
     min-height: 100svh;
     padding: 20px 20px 48px;
-    max-width: 720px;
+    max-width: 820px;
     margin: 0 auto;
   }
 
@@ -101,52 +83,101 @@
     color: var(--pa2-on-surface-variant);
   }
 
-  .page-lead strong {
-    color: var(--pa2-on-surface);
-  }
-
   .page-lead code {
     font-size: 0.78rem;
     color: var(--pa2-on-surface);
   }
 
-  .cards {
+  .page-main {
+    display: flex;
+    flex-direction: column;
+    gap: 0;
+  }
+
+  .card-list {
     list-style: none;
     margin: 0;
     padding: 0;
-    display: grid;
-    gap: 14px;
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
   }
 
-  .card {
-    padding: 18px 20px;
+  .card-item {
+    margin: 0;
+  }
+
+  .card-details {
     border-radius: 12px;
     border: 1px solid var(--mock-chrome-border);
     background: var(--pa2-surface-container);
+    overflow: hidden;
+  }
+
+  .card-summary {
+    cursor: pointer;
+    list-style: none;
+    padding: 16px 18px;
+    display: flex;
+    flex-direction: column;
+    align-items: stretch;
+    gap: 8px;
+  }
+
+  .card-summary::-webkit-details-marker {
+    display: none;
+  }
+
+  .summary-row {
+    display: flex;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+  }
+
+  .chevron {
+    flex-shrink: 0;
+    width: 1.25rem;
+    text-align: center;
+    font-size: 0.75rem;
+    color: var(--pa2-primary);
+    font-weight: 800;
+  }
+
+  .chevron::before {
+    content: '+';
+  }
+
+  .card-details[open] .chevron::before {
+    content: '−';
   }
 
   .card-title {
-    margin: 0 0 8px;
     font-size: 1rem;
     font-weight: 800;
     color: var(--pa2-primary);
   }
 
   .card-blurb {
-    margin: 0 0 10px;
     font-size: 0.86rem;
     line-height: 1.5;
     color: var(--pa2-on-surface-variant);
+    margin: 0;
   }
 
-  .card-path {
-    margin: 0;
-    font-size: 0.72rem;
+  .source-path {
+    font-size: 0.7rem;
+    color: var(--pa2-on-surface-variant);
+  }
+
+  .source-path code {
+    word-break: break-all;
+    font-size: inherit;
     color: var(--pa2-on-surface);
   }
 
-  .card-path code {
-    word-break: break-all;
+  .doc-html {
+    padding: 0 18px 18px;
   }
 
   .doc-hint {
@@ -170,5 +201,11 @@
   .ext:focus-visible {
     outline: 2px solid var(--pa2-tertiary);
     outline-offset: 2px;
+  }
+
+  .card-summary:focus-visible {
+    outline: 2px solid var(--pa2-tertiary);
+    outline-offset: -2px;
+    border-radius: 10px;
   }
 </style>

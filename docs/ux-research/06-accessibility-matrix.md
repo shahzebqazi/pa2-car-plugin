@@ -1,6 +1,6 @@
 # Accessibility matrix — phone vs Android Auto (projected)
 
-**Principle:** More **density** is not more accessible in a **moving vehicle**; pair WCAG-aligned **phone** patterns with **car** realism ([android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md) §2, §7).
+**Principle:** More **density** is not more accessible in a **moving vehicle**; pair WCAG-aligned **phone** patterns with **car** realism ([android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md), goals and accessibility sections).
 
 ## Matrix — surface × topic
 

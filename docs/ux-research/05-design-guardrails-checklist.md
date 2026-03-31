@@ -1,6 +1,6 @@
 # Design guardrails checklist
 
-Use before milestones (mockups, browse tree changes, Auto release candidates). Tag each item **SRC** (linked source) or **ASM** (team assumption).
+Use before major UX reviews, browse-tree changes, or Android Auto release candidates. Tag each item **SRC** (linked source) or **ASM** (team assumption).
 
 | # | Guardrail | SRC / ASM | Verification |
 |---|-----------|-----------|--------------|

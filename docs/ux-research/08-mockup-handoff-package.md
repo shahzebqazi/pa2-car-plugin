@@ -1,9 +1,10 @@
-# Mockup and engineering handoff package
+# Android Auto: mockups and implementation checklist
 
-**For:** UI mockup developer (Svelte or other), Kotlin / Media3 engineers.  
-**Prerequisites:** Read [01-platform-constraint-sheet.md](01-platform-constraint-sheet.md) before drawing **any** Android Auto screen (note the **browse implementation caveat**).
+**Who this is for:** Engineers shipping Media3 on Power Ampache 2, and anyone building **browser mockups** (for example the Svelte app in this repo).
 
-**Upstream verification:** Scenarios **P1–P2** assume a **browsable `MediaItem` tree** on the head unit as described in Google’s [media for cars](https://developer.android.com/training/cars/media) docs. Confirm in **`Power-Ampache-2`** that `MediaLibraryService` / `MediaLibrarySession` (or equivalent) is implemented before mockups are treated as **shipping** Auto UI.
+**Before you draw or spec car screens:** Read [01-platform-constraint-sheet.md](01-platform-constraint-sheet.md), especially the **browse implementation caveat**. On Android Auto you do not theme the head unit like the phone app; you supply **content and session behaviour** (tree, metadata, artwork, errors, voice).
+
+**Verify in upstream code:** Scenarios **P1–P2** assume a **browsable `MediaItem` tree** on the head unit, as described in Google’s [Create audio media apps](https://developer.android.com/training/cars/media) guide. Confirm in **Power-Ampache-2** that library browse (for example `MediaLibraryService` / `MediaLibrarySession` or equivalent callbacks) matches product intent before treating mockups as **final** car UI.
 
 ## 1. Prioritized scenarios (build in this order)
 
@@ -21,19 +22,21 @@
 
 Copy from [05-design-guardrails-checklist.md](05-design-guardrails-checklist.md): especially **G3–G7**, **G10**.
 
-## 3. Labelling rules for mockups
+## 3. Labels for mockup frames
+
+Use these consistently so reviewers know which stack they are looking at.
 
 | Label | When to use |
 |-------|-------------|
-| **Phone — PA2 theme** | Uses colors/type from [../design-system/01-brand-and-language.md](../design-system/01-brand-and-language.md) |
-| **Auto — host media (PA2)** | Generic list/now-playing **pattern**; no custom PA2 chrome |
-| **Sandbox — Car App Library** | Only for `android-auto` sample; **not** PA2 shipping |
+| **Phone — PA2 theme** | Handheld UI using colors and type from [../design-system/01-brand-and-language.md](../design-system/01-brand-and-language.md) |
+| **Auto — host media (PA2)** | **Pattern only** for host-rendered lists and now playing; not PA2-branded chrome |
+| **Sandbox — Car App Library** | Kotlin sample under `app/` in this repo only; **not** PA2 production |
 
-## 4. Deliverables expected from mockups
+## 4. What mockups should include
 
-- Wireframes or hi-fi for **P0–P1** at minimum.
-- **Mermaid** or numbered flows matching [02-task-analysis-and-flows.md](02-task-analysis-and-flows.md).
-- Explicit **deviation log** if a screen cannot be built under **media browser** constraints.
+- Wireframes or high-fidelity frames for **P0–P1** at minimum.
+- **Mermaid** or numbered flows that match [02-task-analysis-and-flows.md](02-task-analysis-and-flows.md).
+- A short **note where the design diverges** from media-browser constraints, if it does.
 
 ## 5. Engineering checklist (Kotlin / Media3)
 
@@ -43,9 +46,9 @@ Copy from [05-design-guardrails-checklist.md](05-design-guardrails-checklist.md)
 - [ ] **Error** reporting hooked per [cars/media/errors](https://developer.android.com/training/cars/media/errors).
 - [ ] DHU smoke test on **browse + play + voice** (where available).
 
-## 6. Open questions to resolve with maintainer
+## 6. Open questions (track with the maintainer)
 
-See [07-research-synthesis.md](07-research-synthesis.md) §7; track decisions here:
+See [07-research-synthesis.md](07-research-synthesis.md) (section on open questions). Track decisions here:
 
 | Question | Decision | Date |
 |----------|----------|------|

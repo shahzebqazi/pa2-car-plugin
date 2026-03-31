@@ -17,7 +17,7 @@
 <nav class="site-nav" aria-label="Site sections">
   <a class={navClass('home')} href="#/">Home</a>
   <span class="sep" aria-hidden="true">·</span>
-  <a class={navClass('design')} href="#/design">Design system</a>
+  <a class={navClass('design')} href="#/design">Auto design</a>
   <span class="sep" aria-hidden="true">·</span>
   <a class={navClass('research')} href="#/research">Research</a>
   <span class="sep" aria-hidden="true">·</span>

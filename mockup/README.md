@@ -1,6 +1,6 @@
 # Power Ampache 2 × Android Auto — UI mockup
 
-**Svelte + Vite** browser preview for **P0–P3** flows in [`docs/ux-research/08-mockup-handoff-package.md`](../docs/ux-research/08-mockup-handoff-package.md). Same labelling ideas as root [`AGENTS.md`](../AGENTS.md).
+**Svelte + Vite** browser preview for **P0–P3** flows and labels in [`docs/ux-research/08-mockup-handoff-package.md`](../docs/ux-research/08-mockup-handoff-package.md) (mockups + Media3 checklist). Naming matches root [`AGENTS.md`](../AGENTS.md).
 
 ## What this is
 
@@ -14,6 +14,10 @@ There is **no** extra “sandbox template” row in the mockup app anymore: **Ca
 Phone now-playing uses **`public/pa2/placeholder-album.svg`** (from PA2 `placeholder_album` artwork) for backdrop + art — no remote images.
 
 **Typography:** **`public/fonts/Nunito-Variable.ttf`** (OFL in `public/fonts/OFL.txt`); no Google Fonts CDN in `index.html`.
+
+**Research (`#/research`):** Four `<details>` sections render the same markdown as `docs/ux-research/00-executive-summary.md`, `07-…`, `02-…`, and `08-mockup-handoff-package.md` (built with [marked](https://github.com/markedjs/marked); Mermaid blocks appear as fenced code).
+
+**Auto design (`#/design`):** Puts **Android Auto** integration first (full **platform constraint sheet** + **design-system index**). **PowerAmpache2Theme** swatches and Nunito sit under **Phone reference** — they are not head-unit chrome.
 
 ## Run the mockup (browser)
 

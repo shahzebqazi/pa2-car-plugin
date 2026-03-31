@@ -1,6 +1,6 @@
 # Task analysis and flows — driver-critical music tasks
 
-**Scope:** Music playback and library access for a **MediaBrowserService**-style app (Power Ampache 2) on **Android Auto**. Methods align with [android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md) §5.
+**Scope:** Music playback and library access for a **MediaBrowserService**-style app (Power Ampache 2) on **Android Auto**. Methods align with the task-analysis section of [android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md).
 
 ## Top driver-critical tasks (priority order)
 

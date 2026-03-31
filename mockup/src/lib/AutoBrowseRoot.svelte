@@ -39,6 +39,7 @@
 
 <style>
   .auto-shell {
+    container-type: inline-size;
     width: 100%;
     max-width: var(--car-display-max-w, 1120px);
     margin: 0 auto;
@@ -139,5 +140,11 @@
     color: #888;
     font-size: 1.15rem;
     flex-shrink: 0;
+  }
+  @container (max-width: 520px) {
+    .auto-screen {
+      aspect-ratio: unset;
+      min-height: 360px;
+    }
   }
 </style>

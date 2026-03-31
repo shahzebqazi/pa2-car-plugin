@@ -49,7 +49,7 @@
           aria-valuemin={0}
           aria-valuemax={243}
           aria-valuenow={84}
-          aria-valuetext="1 minutes 24 seconds of 4 minutes 3 seconds"
+          aria-valuetext="1 minute, 24 seconds of 4 minutes, 3 seconds total"
           tabindex="0"
         >
           <div class="scrub" aria-hidden="true">

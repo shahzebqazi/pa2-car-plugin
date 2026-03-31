@@ -17,6 +17,7 @@
 
 <style>
   .auto-shell {
+    container-type: inline-size;
     width: 100%;
     max-width: var(--car-display-max-w, 1120px);
     margin: 0 auto;
@@ -65,5 +66,11 @@
   .retry:focus-visible {
     outline: 2px solid #fff;
     outline-offset: 2px;
+  }
+  @container (max-width: 520px) {
+    .auto-screen {
+      aspect-ratio: unset;
+      min-height: 240px;
+    }
   }
 </style>

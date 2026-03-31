@@ -1,6 +1,6 @@
 # Platform constraint sheet — Android Auto + Power Ampache 2
 
-**Single source of truth** for what the **host** allows vs what **PA2** implements. Pair with [bibliography.md](bibliography.md).
+Use this sheet when scoping **Android Auto** behaviour: what the **head unit** controls, what the **app** must supply, and what is **out of scope** for a standard media-browser app. Pair with [bibliography.md](bibliography.md) for citations.
 
 ## Integration path (upstream Power Ampache 2)
 

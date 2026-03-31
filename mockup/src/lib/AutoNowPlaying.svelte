@@ -23,7 +23,7 @@
             aria-valuemin={0}
             aria-valuemax={243}
             aria-valuenow={84}
-            aria-valuetext="1 minutes 24 seconds of 4 minutes 3 seconds"
+            aria-valuetext="1 minute, 24 seconds of 4 minutes, 3 seconds total"
             tabindex="0"
           >
             <div class="np-wave-viz" aria-hidden="true">
@@ -61,6 +61,7 @@
 
 <style>
   .auto-shell {
+    container-type: inline-size;
     width: 100%;
     max-width: var(--car-display-max-w, 1120px);
     margin: 0 auto;
@@ -259,7 +260,12 @@
     outline: 2px solid #fff;
     outline-offset: 2px;
   }
-  @media (max-width: 520px) {
+  /* Narrow shell: drop fixed 16:9 (was clipping) and stack now playing like a portrait HU. */
+  @container (max-width: 520px) {
+    .auto-screen {
+      aspect-ratio: unset;
+      min-height: 320px;
+    }
     .np {
       flex-wrap: wrap;
       justify-content: center;

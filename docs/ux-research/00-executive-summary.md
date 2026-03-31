@@ -1,11 +1,11 @@
 # Executive summary — UX research (Android Auto + Power Ampache 2)
 
 **Date:** 2026-03-30  
-**Audience:** Maintainer, design, engineering.
+**Audience:** Maintainers, design, Android engineers.
 
-## What we set out to do
+## Purpose
 
-Establish an **evidence-oriented** baseline for **driver-safe** music use on **Android Auto**, aligned with **Google’s media-for-cars** requirements, and tie it to **Power Ampache 2**’s real integration (**Media3** `MediaSession` + `MediaSessionService`, with manifest **media browser** intent filters), not the sandbox **Car App Library** sample.
+Summarize an **evidence-oriented** baseline for **safe, low-friction** music use on **Android Auto**, aligned with **Google’s media-for-cars** guidance. The production integration path is **Power Ampache 2** with **Media3** (`MediaSession` + `MediaSessionService` and media-browser discovery in the manifest). The **Car App Library** sample in this sandbox repo is for learning only; it is **not** how PA2 ships car UI.
 
 ## Key findings
 
@@ -21,9 +21,9 @@ Establish an **evidence-oriented** baseline for **driver-safe** music use on **A
 
 ## Recommended next steps
 
-- Implement browse prioritization: **recents / continue / playlists** before deep **artist → album** paths.
-- Validate **voice** paths and **error** surfacing on **DHU**.
-- Keep mockups **labelled** by surface (**phone** vs **host media** vs **sandbox templates**).
+- Prioritize browse roots: **continue listening**, **recents**, **playlists** before deep **artist → album** paths.
+- Exercise **voice** flows and **error** surfacing on the **Desktop Head Unit** and, when possible, a real vehicle.
+- Label mockups by surface: **phone (PA2 theme)** vs **host media** vs **sandbox Car App Library**.
 
 ## Full detail
 
