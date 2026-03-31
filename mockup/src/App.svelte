@@ -6,12 +6,12 @@
   import AutoNowPlaying from './lib/AutoNowPlaying.svelte'
   import AutoBrowseRoot from './lib/AutoBrowseRoot.svelte'
   import AutoErrorState from './lib/AutoErrorState.svelte'
-  import DhuScreenshot from './lib/DhuScreenshot.svelte'
+  import CarAppLibraryBrowse from './lib/CarAppLibraryBrowse.svelte'
+  import CarAppLibraryNowPlaying from './lib/CarAppLibraryNowPlaying.svelte'
   import HomePage from './lib/HomePage.svelte'
   import DesignSystemPage from './lib/DesignSystemPage.svelte'
   import ResearchPage from './lib/ResearchPage.svelte'
   import SiteNav from './lib/SiteNav.svelte'
-  import { publicUrl } from './lib/public-url'
   import { parseHash, type AppRoute } from './lib/hash-routes'
   import type { MockupFrameId } from './lib/screen-ids'
 
@@ -23,8 +23,8 @@
     { id: 'phone-error', label: 'P2 · Phone — PA2 · Error' },
     { id: 'auto-error', label: 'P2 · Auto — host media · Error' },
     { id: 'phone-queue', label: 'P3 · Phone — PA2 · Queue' },
-    { id: 'dhu-browse', label: 'Sandbox — Car App Library · DHU browse' },
-    { id: 'dhu-np', label: 'Sandbox — Car App Library · DHU now playing' },
+    { id: 'dhu-browse', label: 'Sandbox — Car App Library · Browse (mock)' },
+    { id: 'dhu-np', label: 'Sandbox — Car App Library · Now playing (mock)' },
   ]
 
   let route = $state<AppRoute>(parseHash(typeof window !== 'undefined' ? window.location.hash : ''))
@@ -71,7 +71,7 @@
         <code>docs/ux-research/08-mockup-handoff-package.md</code>:
         <strong>Phone — PA2 theme</strong> (Nunito + tokens),
         <strong>Auto — host media (PA2)</strong> (generic host chrome, no PA2 hex),
-        <strong>Sandbox — Car App Library</strong> (DHU images = Kotlin sample only, not shipping PA2 Auto).
+        <strong>Sandbox — Car App Library</strong> (Svelte template mocks; DHU PNGs in <code>public/dhu/</code> kept for reference, not embedded here).
       </p>
       <nav class="chips" aria-label="Mockup frames">
         {#each frames as f}
@@ -86,8 +86,9 @@
         {/each}
       </nav>
       <p class="dhu-note">
-        <strong>DHU</strong> runs the sandbox Kotlin car app on a device or emulator; replace stand-ins in
-        <code>public/dhu/</code> with real captures. Browser <code>npm run dev</code> does not drive the car display.
+        <strong>DHU</strong> exercises the Kotlin <code>androidx.car.app</code> sample on a device or emulator.
+        Reference captures live in <code>public/dhu/</code>; these two sandbox frames are drawn mockups instead of
+        embedded screenshots.
       </p>
     </aside>
 
@@ -107,17 +108,9 @@
       {:else if route.frame === 'auto-error'}
         <AutoErrorState />
       {:else if route.frame === 'dhu-browse'}
-        <DhuScreenshot
-          imageSrc={publicUrl('dhu/dhu-browse.png')}
-          alt="Desktop Head Unit: Android Auto browse list (sandbox sample)"
-          caption="Stand-in wide-aspect image for layout review. Replace with a real DHU capture after connecting a device and running screenshot in the DHU terminal."
-        />
+        <CarAppLibraryBrowse />
       {:else if route.frame === 'dhu-np'}
-        <DhuScreenshot
-          imageSrc={publicUrl('dhu/dhu-now-playing.png')}
-          alt="Desktop Head Unit: Android Auto now playing (sandbox sample)"
-          caption="Stand-in wide-aspect image for layout review. Replace with a real DHU capture from your session."
-        />
+        <CarAppLibraryNowPlaying />
       {/if}
     </main>
   </div>

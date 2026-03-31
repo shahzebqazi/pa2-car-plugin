@@ -9,7 +9,7 @@
 <div class="phone-shell">
   <FrameLabel
     label="Phone — PA2 theme"
-    note="P0: Nunito + PA2 tokens; backdrop = current track art (cover, blur, scrim); wave scrub visualizer; 48dp-class targets; reduced-motion disables decorative wave/art motion."
+    note="P0: Nunito + PA2 tokens; backdrop = current track art (cover, blur, scrim); standard seek bar (wave-style scrub exploration is on Auto — host media mockup); 48dp-class targets; reduced-motion tones down art hover only."
   />
   <div class="screen">
     <div class="bg-stack" aria-hidden="true">
@@ -42,7 +42,6 @@
       </div>
 
       <div class="scrub-block">
-        <!-- Organic wave + bar: visual anchor for seek (AGENTS.md). -->
         <div
           class="seek-surface hit-48"
           role="slider"
@@ -53,19 +52,6 @@
           aria-valuetext="1 minutes 24 seconds of 4 minutes 3 seconds"
           tabindex="0"
         >
-          <div class="wave-viz" aria-hidden="true">
-            <svg class="wave-svg" viewBox="0 0 400 48" preserveAspectRatio="none">
-              <path
-                class="wave-path wave-path-back"
-                d="M0,28 Q25,8 50,28 T100,28 T150,20 T200,32 T250,14 T300,30 T350,18 T400,26 L400,48 L0,48 Z"
-              />
-              <path
-                class="wave-path wave-path-front"
-                d="M0,30 Q30,12 60,30 T120,22 T180,34 T240,16 T300,28 T360,20 T400,24 L400,48 L0,48 Z"
-              />
-            </svg>
-            <div class="wave-progress" style="width: 32%"></div>
-          </div>
           <div class="scrub" aria-hidden="true">
             <span class="time">1:24</span>
             <div class="bar">
@@ -75,7 +61,7 @@
             <span class="time">4:03</span>
           </div>
         </div>
-        <p class="scrub-hint">Drag horizontally on this area to seek (gesture target)</p>
+        <p class="scrub-hint">Drag horizontally to seek (phone gesture target)</p>
       </div>
 
       <div class="transport">
@@ -150,22 +136,6 @@
     }
     .ctrl.play {
       transition: transform 0.2s ease;
-    }
-    .wave-svg {
-      animation: wave-pan 14s ease-in-out infinite alternate;
-    }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    .wave-svg {
-      animation: none;
-    }
-  }
-  @keyframes wave-pan {
-    from {
-      transform: translateX(-4%);
-    }
-    to {
-      transform: translateX(4%);
     }
   }
   .top {
@@ -253,35 +223,6 @@
   .seek-surface:focus-visible {
     outline: 2px solid var(--pa2-tertiary);
     outline-offset: 2px;
-  }
-  .wave-viz {
-    position: relative;
-    height: 40px;
-    border-radius: 8px;
-    overflow: hidden;
-    background: rgba(0, 0, 0, 0.22);
-    border: 1px solid rgba(255, 255, 255, 0.08);
-  }
-  .wave-svg {
-    display: block;
-    width: 100%;
-    height: 100%;
-  }
-  .wave-path-back {
-    fill: rgba(112, 204, 204, 0.15);
-  }
-  .wave-path-front {
-    fill: rgba(112, 204, 204, 0.35);
-  }
-  .wave-progress {
-    position: absolute;
-    left: 0;
-    top: 0;
-    bottom: 0;
-    background: linear-gradient(90deg, rgba(112, 204, 204, 0.25), transparent);
-    pointer-events: none;
-    border-right: 2px solid var(--pa2-primary);
-    box-sizing: border-box;
   }
   .scrub {
     display: flex;

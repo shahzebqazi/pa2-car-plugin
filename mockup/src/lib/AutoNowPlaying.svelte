@@ -5,7 +5,7 @@
 <div class="auto-shell">
   <FrameLabel
     label="Auto — host media (PA2)"
-    note="P0 wireframe: system chrome; generic grays (no PA2 hex in real projection). Elided title lines; transport + optional progress per host (scrub when allowed)."
+    note="P0 wireframe: system chrome; generic grays (no PA2 hex in real projection). Organic wave + bar scrub (AGENTS.md visual anchor) shown as exploratory host-adjacent mock — actual AA scrub is OEM-dependent; reduced-motion disables wave motion only."
   />
   <div class="auto-screen">
     <div class="np">
@@ -15,12 +15,39 @@
           <p class="np-title">Midnight City</p>
           <p class="np-sub">M83 · Hurry Up, We're Dreaming</p>
         </div>
-        <div class="np-progress" aria-hidden="true">
-          <span class="np-time">1:24</span>
-          <div class="np-bar">
-            <div class="np-fill"></div>
+        <div class="np-scrub-block">
+          <div
+            class="np-seek hit"
+            role="slider"
+            aria-label="Playback position"
+            aria-valuemin={0}
+            aria-valuemax={243}
+            aria-valuenow={84}
+            aria-valuetext="1 minutes 24 seconds of 4 minutes 3 seconds"
+            tabindex="0"
+          >
+            <div class="np-wave-viz" aria-hidden="true">
+              <svg class="np-wave-svg" viewBox="0 0 400 48" preserveAspectRatio="none">
+                <path
+                  class="np-wave-back"
+                  d="M0,28 Q25,8 50,28 T100,28 T150,20 T200,32 T250,14 T300,30 T350,18 T400,26 L400,48 L0,48 Z"
+                />
+                <path
+                  class="np-wave-front"
+                  d="M0,30 Q30,12 60,30 T120,22 T180,34 T240,16 T300,28 T360,20 T400,24 L400,48 L0,48 Z"
+                />
+              </svg>
+              <div class="np-wave-progress" style="width: 32%"></div>
+            </div>
+            <div class="np-progress" aria-hidden="true">
+              <span class="np-time">1:24</span>
+              <div class="np-bar">
+                <div class="np-fill"></div>
+                <div class="np-knob" style="left: 32%"></div>
+              </div>
+              <span class="np-time">4:03</span>
+            </div>
           </div>
-          <span class="np-time">4:03</span>
         </div>
       </div>
       <div class="np-controls">
@@ -100,6 +127,70 @@
     overflow: hidden;
     text-overflow: ellipsis;
   }
+  .np-scrub-block {
+    max-width: 100%;
+  }
+  .np-seek.hit {
+    display: flex;
+    flex-direction: column;
+    gap: 6px;
+    padding: 6px 8px;
+    border-radius: 10px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    background: rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+  }
+  .np-seek:focus-visible {
+    outline: 2px solid #fff;
+    outline-offset: 2px;
+  }
+  .np-wave-viz {
+    position: relative;
+    height: clamp(32px, 5vw, 40px);
+    border-radius: 6px;
+    overflow: hidden;
+    background: rgba(0, 0, 0, 0.35);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+  }
+  .np-wave-svg {
+    display: block;
+    width: 100%;
+    height: 100%;
+  }
+  .np-wave-back {
+    fill: rgba(255, 255, 255, 0.08);
+  }
+  .np-wave-front {
+    fill: rgba(255, 255, 255, 0.18);
+  }
+  .np-wave-progress {
+    position: absolute;
+    left: 0;
+    top: 0;
+    bottom: 0;
+    background: linear-gradient(90deg, rgba(200, 200, 200, 0.2), transparent);
+    pointer-events: none;
+    border-right: 2px solid #c8c8c8;
+    box-sizing: border-box;
+  }
+  @media (prefers-reduced-motion: no-preference) {
+    .np-wave-svg {
+      animation: np-wave-pan 14s ease-in-out infinite alternate;
+    }
+  }
+  @media (prefers-reduced-motion: reduce) {
+    .np-wave-svg {
+      animation: none;
+    }
+  }
+  @keyframes np-wave-pan {
+    from {
+      transform: translateX(-4%);
+    }
+    to {
+      transform: translateX(4%);
+    }
+  }
   .np-progress {
     display: flex;
     align-items: center;
@@ -114,11 +205,12 @@
     flex-shrink: 0;
   }
   .np-bar {
+    position: relative;
     flex: 1;
     height: 5px;
     border-radius: 3px;
     background: #444;
-    overflow: hidden;
+    overflow: visible;
     min-width: 48px;
   }
   .np-fill {
@@ -126,6 +218,18 @@
     height: 100%;
     background: #c8c8c8;
     border-radius: 3px;
+  }
+  .np-knob {
+    position: absolute;
+    top: 50%;
+    width: 12px;
+    height: 12px;
+    margin-left: -6px;
+    margin-top: -6px;
+    border-radius: 50%;
+    background: #eee;
+    border: 2px solid #c8c8c8;
+    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
   }
   .np-controls {
     display: flex;

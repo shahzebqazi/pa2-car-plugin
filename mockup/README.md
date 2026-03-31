@@ -8,13 +8,13 @@ Disposable **Svelte + Vite** browser prototype for **P0–P3** scenarios from [`
 |-------------|---------|
 | **Phone — PA2 theme** | Nunito + colors from [`docs/design-system/01-brand-and-language.md`](../docs/design-system/01-brand-and-language.md) |
 | **Auto — host media (PA2)** | Generic list / now-playing pattern (system fonts, neutral chrome). Real Android Auto does **not** use PA2 hex or Nunito on the media path. |
-| **Sandbox — Car App Library** | DHU screenshot stand-ins under `mockup/public/dhu/` (`dhu-browse.png`, `dhu-now-playing.png`). Replace with **real** PNGs from the DHU (see below). Not PA2 shipping Auto UI. |
+| **Sandbox — Car App Library** | Svelte template **mockups** (`CarAppLibraryBrowse`, `CarAppLibraryNowPlaying`). **`public/dhu/*.png`** stays in the repo for DHU reference / home hero, not embedded in those two frames. Not PA2 shipping Auto UI. |
 
 Screens include **P3** phone queue (read-mostly) and **P2** generic Auto error wireframe. Phone now-playing uses **`public/pa2/placeholder-album.svg`** (converted from PA2 `app/.../drawable/placeholder_album.xml`, tint `onSurfaceVariant`) for zoom-fill backdrop + foreground art — no external image URLs.
 
 **Typography:** Nunito is loaded from **`public/fonts/Nunito-Variable.ttf`** (OFL, `public/fonts/OFL.txt`); `index.html` does not use Google Fonts or other CDNs.
 
-The runnable **Car App Library** surface is the Kotlin sample under `app/src/main/.../car/`; DHU entries in the mockup **embed** head-unit captures of that flow.
+The runnable **Car App Library** surface is the Kotlin sample under `app/src/main/.../car/`; the mockup’s sandbox frames **approximate** that flow in the browser while DHU PNGs remain optional reference assets.
 
 ## Run the mockup (browser)
 
