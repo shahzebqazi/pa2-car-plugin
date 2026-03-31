@@ -11,6 +11,7 @@
   import DesignSystemPage from './lib/DesignSystemPage.svelte'
   import ResearchPage from './lib/ResearchPage.svelte'
   import SiteNav from './lib/SiteNav.svelte'
+  import { publicUrl } from './lib/public-url'
   import { parseHash, type AppRoute } from './lib/hash-routes'
   import type { MockupFrameId } from './lib/screen-ids'
 
@@ -107,13 +108,13 @@
         <AutoErrorState />
       {:else if route.frame === 'dhu-browse'}
         <DhuScreenshot
-          imageSrc="/dhu/dhu-browse.png"
+          imageSrc={publicUrl('dhu/dhu-browse.png')}
           alt="Desktop Head Unit: Android Auto browse list (sandbox sample)"
           caption="Stand-in wide-aspect image for layout review. Replace with a real DHU capture after connecting a device and running screenshot in the DHU terminal."
         />
       {:else if route.frame === 'dhu-np'}
         <DhuScreenshot
-          imageSrc="/dhu/dhu-now-playing.png"
+          imageSrc={publicUrl('dhu/dhu-now-playing.png')}
           alt="Desktop Head Unit: Android Auto now playing (sandbox sample)"
           caption="Stand-in wide-aspect image for layout review. Replace with a real DHU capture from your session."
         />

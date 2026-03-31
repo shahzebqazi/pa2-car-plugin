@@ -2,7 +2,7 @@
   import FrameLabel from './FrameLabel.svelte'
 
   interface Props {
-    /** Vite public URL, e.g. /dhu/dhu-browse.png */
+    /** Resolved URL for a file under public/ (use publicUrl() so base path works on GH Pages). */
     imageSrc: string
     alt: string
     caption: string

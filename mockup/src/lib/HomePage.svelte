@@ -1,12 +1,16 @@
 <script lang="ts">
+  import { publicUrl } from './public-url'
+
   let heroFailed = $state(false)
+
+  const heroSrc = publicUrl('dhu/dhu-now-playing.png')
 </script>
 
 <div class="home">
   <div class="hero-fill">
     {#if !heroFailed}
       <img
-        src="/dhu/dhu-now-playing.png"
+        src={heroSrc}
         alt="Desktop Head Unit: Android Auto now playing (sandbox sample)"
         class="hero-img"
         width="1920"
@@ -18,8 +22,9 @@
     {:else}
       <div class="hero-fallback">
         <p>
-          Add <code>public/dhu/dhu-now-playing.png</code> (DHU <code>screenshot</code>). Served as
-          <code>/dhu/dhu-now-playing.png</code> while <code>npm run dev</code> is running.
+          Add <code>mockup/public/dhu/dhu-now-playing.png</code> (DHU <code>screenshot</code>). The
+          app loads it via Vite’s public folder, with the correct prefix for
+          <code>npm run dev</code> and GitHub Pages.
         </p>
       </div>
     {/if}

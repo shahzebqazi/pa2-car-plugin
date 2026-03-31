@@ -1,8 +1,9 @@
 <script lang="ts">
   import FrameLabel from './FrameLabel.svelte'
+  import { publicUrl } from './public-url'
 
   /** PA2 app drawable `placeholder_album` → SVG in `public/pa2/` (tint = onSurfaceVariant). */
-  const albumArtSrc = '/pa2/placeholder-album.svg'
+  const albumArtSrc = publicUrl('pa2/placeholder-album.svg')
 </script>
 
 <div class="phone-shell">
