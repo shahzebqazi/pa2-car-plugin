@@ -13,9 +13,9 @@ The **mockup** site (`mockup/`) embeds some of the same Markdown for browsing; t
 | 03 | [03-music-auto-ux-pattern-table.md](03-music-auto-ux-pattern-table.md) | Music-on-Auto patterns vs PA2 features | 2026-03-30 |
 | 04 | [04-distraction-brief.md](04-distraction-brief.md) | Secondary-task demand + citations | 2026-03-30 |
 | 05 | [05-design-guardrails-checklist.md](05-design-guardrails-checklist.md) | Reviewable checklist (source vs assumption) | 2026-03-30 |
-| 06 | [06-accessibility-matrix.md](06-accessibility-matrix.md) | Phone vs projected UI | 2026-03-30 |
+| 06 | [06-accessibility-matrix.md](06-accessibility-matrix.md) | Phone vs projected UI + mockup a11y notes | 2026-03-30 |
 | 07 | [07-research-synthesis.md](07-research-synthesis.md) | Full synthesis + tradeoffs | 2026-03-30 |
-| 08 | [08-mockup-handoff-package.md](08-mockup-handoff-package.md) | P0–P3 scenarios, mockup labels, Media3 checklist | 2026-03-30 |
+| 08 | [08-mockup-handoff-package.md](08-mockup-handoff-package.md) | P0–P3 scenarios, mockup labels, fidelity limits, Media3 checklist | 2026-03-30 |
 
 **Related:** [android-auto-ux-research-plan.md](../android-auto-ux-research-plan.md) (original phased plan), [design system](../design-system/00-design-system-index.md).
 

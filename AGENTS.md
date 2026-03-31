@@ -48,7 +48,9 @@ Agents **reviewing or editing** the **`mockup/`** Vite + Svelte app should keep 
 - **Mockup route (`#/mockup`):** Explanatory text and **P0–P3** chips sit **beside** the preview on wide viewports; **one capped preview width** so phone and car frames feel comparable; tall phone mockups **scroll inside** the preview card (`App.svelte`). Avoid accidental full-viewport overflow.
 - **Research route:** Expandable cards show **title, blurb, and source path** before inlined markdown; prose styling in **`mockup/src/lib/md-prose.css`** must keep **tables, `pre`/code, and links** readable at mobile widths.
 - **Design route:** **Android Auto implementation** content is primary; **phone theme** swatches stay in the **collapsible** reference section so car vs phone is obvious on first scan.
-- **Quality bar:** After substantive UI changes, run **`npm run build`** and **`npm run check`** under `mockup/`. For **GitHub Pages**, set **`VITE_BASE_PATH`** to the repo subpath so assets resolve (`mockup/vite.config.ts`).
+- **Frame chrome:** `FrameLabel` uses **`surface="phone"`** (PA2 primary on the badge) vs **`surface="auto"`** (neutral badge/background) so **Auto — host media** previews are not mistaken for PA2-teal head-unit branding. This strip is **reviewer UI** only.
+- **Reduced motion:** Gate decorative **CSS transitions and animations** with **`prefers-reduced-motion`** where practical (home nav, phone/auto player mockups), per [`docs/ux-research/06-accessibility-matrix.md`](docs/ux-research/06-accessibility-matrix.md).
+- **Quality bar:** After substantive UI changes, run **`npm run build`** and **`npm run check`** under `mockup/`. For **GitHub Pages**, set **`VITE_BASE_PATH`** to the repo subpath so assets resolve (`mockup/vite.config.ts`). Browser mockups **illustrate** guardrails; they do **not** replace Play / DHU / device verification ([`docs/ux-research/05-design-guardrails-checklist.md`](docs/ux-research/05-design-guardrails-checklist.md)).
 
 ---
 

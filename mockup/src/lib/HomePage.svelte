@@ -175,7 +175,12 @@
     border: 1px solid var(--mock-chrome-border);
     background: var(--pa2-surface-container);
     color: var(--pa2-on-surface);
-    transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .nav-btn {
+      transition: border-color 0.15s ease, color 0.15s ease, background 0.15s ease;
+    }
   }
 
   .nav-btn:hover {

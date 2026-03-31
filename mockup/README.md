@@ -19,6 +19,12 @@ Phone now-playing uses **`public/pa2/placeholder-album.svg`** (from PA2 `placeho
 
 **Auto design (`#/design`):** Puts **Android Auto** integration first (full **platform constraint sheet** + **design-system index**). **PowerAmpache2Theme** swatches and Nunito sit under **Phone reference** — they are not head-unit chrome.
 
+## Hardening and stakeholder expectations
+
+- **`FrameLabel`:** Car frames pass **`surface="auto"`** so the preview badge uses **neutral** color (PA2 teal is **phone** and reviewer-only, not “OEM chrome”).
+- **Motion:** Decorative CSS animations/transitions respect **`prefers-reduced-motion`** on player mockups and home nav buttons where implemented.
+- **Compliance:** These frames **do not** replace [Play car quality](https://developer.android.com/docs/quality-guidelines/car-app-quality) or [distraction safeguards](https://developer.android.com/training/cars/media/distraction-safeguards) verification — see [`docs/ux-research/05-design-guardrails-checklist.md`](../docs/ux-research/05-design-guardrails-checklist.md) and **Browser mockups vs shipping verification** there.
+
 ## Run the mockup (browser)
 
 ```bash

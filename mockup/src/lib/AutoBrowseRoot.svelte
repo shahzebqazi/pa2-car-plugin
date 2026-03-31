@@ -12,6 +12,7 @@
 
 <div class="auto-shell">
   <FrameLabel
+    surface="auto"
     label="Auto — host media (PA2)"
     note="Same library idea as the phone mockup, in plain car list form. Row text comes from the app; the shell owns the header and styling."
   />

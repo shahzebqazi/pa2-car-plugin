@@ -8,6 +8,7 @@
 
 <div class="phone-shell">
   <FrameLabel
+    surface="phone"
     label="Phone — PA2 theme"
     note="Now playing on the phone: blurred cover art behind the UI, normal seek bar, comfortably large controls. The wavy scrub idea is only on the car mockup."
   />

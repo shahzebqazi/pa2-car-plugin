@@ -13,6 +13,7 @@
 
 <div class="phone-shell">
   <FrameLabel
+    surface="phone"
     label="Phone — PA2 theme"
     note="Library root: put resume and recents up top; keep paths to start playback short. Long titles should ellipsize, not wrap forever."
   />

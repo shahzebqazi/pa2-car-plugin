@@ -4,6 +4,7 @@
 
 <div class="auto-shell">
   <FrameLabel
+    surface="auto"
     label="Auto — host media (PA2)"
     note="Same spirit as the phone error screen. Wording and layout in production follow what MediaSession reports and what the host shows."
   />

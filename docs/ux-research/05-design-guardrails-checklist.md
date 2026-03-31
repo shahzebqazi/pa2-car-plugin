@@ -17,6 +17,25 @@ Use before major UX reviews, browse-tree changes, or Android Auto release candid
 | G11 | Artwork and icons follow **media app architecture** (sizes, session) | SRC | Platform doc |
 | G12 | Do not add **in-motion video** or non-media surfaces | SRC | [Cars media](https://developer.android.com/training/cars/media) |
 
+**Primary SRC links (cars / Play):** [App quality for cars](https://developer.android.com/docs/quality-guidelines/car-app-quality) · [Implement distraction safeguards](https://developer.android.com/training/cars/media/distraction-safeguards) · [Create audio media apps](https://developer.android.com/training/cars/media) · [Errors in car media apps](https://developer.android.com/training/cars/media/errors)
+
+---
+
+## Browser mockups (`mockup/`) vs shipping verification
+
+| Guardrail | What mockups can show | What still requires product / platform proof |
+|-----------|------------------------|---------------------------------------------|
+| G1, G2 | N/A — mockups are not a submission artifact | Play checklist, host behaviour, policy updates |
+| G3, G4 | Now-playing layouts with play/pause and skip **visible** on one surface | That **MediaSession** actions and host UI actually expose them in one step on target OEMs |
+| G5 | Flows without keyboard for P0/P1 (browse + voice implied) | Voice **MediaSession** wiring and locale tests |
+| G6, G7 | Shallow root browse, **ellipsized** row copy | Real **`MediaItem`** tree depth and string limits in production |
+| G8 | **One sentence + retry** error copy | [Error reporting](https://developer.android.com/training/cars/media/errors) in app code |
+| G9 | Queue frame labelled **read-mostly**; reorder on phone | Scope in app + host queue UX |
+| G10 | Copy / notes only | Flow audit: settings on phone or parked |
+| G11, G12 | Static frames only; no video | Artwork pipeline, category rules |
+
+Treat Svelte frames as **aligned with intent** when they follow [08-mockup-handoff-package.md](08-mockup-handoff-package.md) labels and the **Fidelity, labelling, and compliance limits** section there.
+
 ---
 
 ## Review record
@@ -24,6 +43,7 @@ Use before major UX reviews, browse-tree changes, or Android Auto release candid
 | Date | Reviewer | Notes |
 |------|----------|-------|
 | 2026-03-30 | Research pass (initial) | Populate SRC links to exact quality-checklist sections in next edit. |
+| 2026-03-30 | Mockup/doc hardening | Added primary SRC link row; **Browser mockups vs shipping verification** table tied to `mockup/`. |
 
 ---
 

@@ -6,6 +6,13 @@
 
 **Verify in upstream code:** Scenarios **P1–P2** assume a **browsable `MediaItem` tree** on the head unit, as described in Google’s [Create audio media apps](https://developer.android.com/training/cars/media) guide. Confirm in **Power-Ampache-2** that library browse (for example `MediaLibraryService` / `MediaLibrarySession` or equivalent callbacks) matches product intent before treating mockups as **final** car UI.
 
+## Fidelity, labelling, and compliance limits
+
+- **Illustration vs proof:** Mockups communicate **information hierarchy**, **copy length**, and **scenario coverage** (P0–P3). They do **not** satisfy [Android app quality for cars](https://developer.android.com/docs/quality-guidelines/car-app-quality) or [distraction safeguards](https://developer.android.com/training/cars/media/distraction-safeguards) by themselves — verification stays **Kotlin / Media3**, **DHU**, and **devices**.
+- **Car frames:** Styled as **host-like** neutral chrome. In `mockup/`, **`FrameLabel`** uses **`surface="auto"`** on Auto frames so the **preview badge** is not PA2 teal (avoids implying branded head units).
+- **Motion:** Phone and Auto player mockups respect **`prefers-reduced-motion`** for decorative animation where implemented; site chrome should follow the same pattern when adding transitions.
+- **QA before handoff:** From `mockup/`, run **`npm run check`** and **`npm run build`** after substantive UI changes (`AGENTS.md`).
+
 ## 1. Prioritized scenarios (build in this order)
 
 | Priority | Scenario | Success criteria |

@@ -13,8 +13,9 @@
 
 <div class="phone-shell">
   <FrameLabel
+    surface="phone"
     label="Phone — PA2 theme"
-    note="Up-next list: expect people to read it in the car; drag-to-reorder is a phone job."
+    note="Up next: read-mostly on the car when exposed; reorder and bulk edit stay on the phone (see guardrails G9)."
   />
   <div class="screen">
     <div class="handle-bar" aria-hidden="true">

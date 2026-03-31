@@ -4,6 +4,7 @@
 
 <div class="phone-shell">
   <FrameLabel
+    surface="phone"
     label="Phone — PA2 theme"
     note="When the server is unreachable: one clear sentence and a single retry. Deeper fixes (accounts, settings) belong on the phone or when parked."
   />

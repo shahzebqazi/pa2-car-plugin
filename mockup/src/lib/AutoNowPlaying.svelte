@@ -4,8 +4,9 @@
 
 <div class="auto-shell">
   <FrameLabel
+    surface="auto"
     label="Auto — host media (PA2)"
-    note="Rough idea of now playing in the car: gray chrome, not PA2 brand colors. The wave behind the scrubber is experimental; real Android Auto depends on the car maker."
+    note="Host-rendered pattern only: gray chrome, not PA2 brand colors. Wave behind the scrubber is exploratory; it turns off under prefers-reduced-motion. OEMs control real layout and scrub appearance."
   />
   <div class="auto-screen">
     <div class="np">
