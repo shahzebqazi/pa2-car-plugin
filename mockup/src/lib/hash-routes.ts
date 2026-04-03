@@ -4,6 +4,7 @@ export type AppRoute =
   | { name: 'home' }
   | { name: 'design' }
   | { name: 'research' }
+  | { name: 'architecture' }
   | { name: 'mockup'; frame: MockupFrameId }
 
 const DEFAULT_MOCKUP_FRAME: MockupFrameId = 'auto-browse-playlists'
@@ -19,6 +20,7 @@ export function parseHash(hash: string): AppRoute {
 
   if (head === 'design' && parts.length === 1) return { name: 'design' }
   if (head === 'research' && parts.length === 1) return { name: 'research' }
+  if (head === 'architecture' && parts.length === 1) return { name: 'architecture' }
 
   if (head === 'mockup') {
     const frame = parts[1]
@@ -37,6 +39,8 @@ export function routeToHash(route: AppRoute): string {
       return '#/design'
     case 'research':
       return '#/research'
+    case 'architecture':
+      return '#/architecture'
     case 'mockup':
       return `#/mockup/${route.frame}`
   }

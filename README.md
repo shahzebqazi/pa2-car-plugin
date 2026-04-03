@@ -57,6 +57,8 @@ After each push to `main`, [`.github/workflows/deploy-github-pages.yml`](.github
 
 Use `cd mockup && npm run dev` locally (assets use base `/`). CI sets `VITE_BASE_PATH=/pa2-car-plugin` so production assets resolve under that path.
 
+**Architecture (UML on Pages):** open **`#/architecture`** on the same site — e.g. [Architecture diagram](https://sqazi.sh/pa2-car-plugin/#/architecture) (Mermaid: system context + simplified plugin class diagram).
+
 ## Android Auto / DHU (full stack)
 
 **Desktop Head Unit (DHU)** is the primary loop for **car UI** during development: install via **SDK Manager → SDK Tools → Android Auto Desktop Head Unit**, or `sdkmanager "extras;google;auto"`. Docs: [Test Android apps for cars](https://developer.android.com/training/cars/testing) and [DHU user guide](https://developer.android.com/training/cars/testing/dhu).

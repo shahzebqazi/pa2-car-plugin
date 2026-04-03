@@ -21,6 +21,8 @@
   <span class="sep" aria-hidden="true">·</span>
   <a class={navClass('research')} href="#/research">Research</a>
   <span class="sep" aria-hidden="true">·</span>
+  <a class={navClass('architecture')} href="#/architecture">Architecture</a>
+  <span class="sep" aria-hidden="true">·</span>
   <a class={navClass('mockup')} href="#/mockup">Mockups</a>
   <span class="sep" aria-hidden="true">·</span>
   <a class="nav-link nav-external" href={SANDBOX_REPO_URL} target="_blank" rel="noreferrer">GitHub</a>

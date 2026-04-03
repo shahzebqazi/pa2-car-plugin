@@ -19,6 +19,7 @@
     "vite": "^8.0.1"
   },
   "dependencies": {
-    "marked": "^17.0.5"
+    "marked": "^17.0.5",
+    "mermaid": "^10.9.5"
   }
 }

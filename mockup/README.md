@@ -20,6 +20,8 @@ This repo’s **umbrella** has **no** root Compose module — **DHU** uses a **M
 
 **Auto design (`#/design`):** Puts **Android Auto** integration first (full **platform constraint sheet** + **design-system index**). **PowerAmpache2Theme** swatches and Nunito sit under **Phone reference** (handheld app only) — they are not head-unit chrome.
 
+**Architecture (`#/architecture`):** Mermaid **UML-style** diagrams (system context + simplified plugin class diagram) for the umbrella repo + nested **PowerAmpache2PluginTemplate** stack — deployed with the same GitHub Pages build as other routes.
+
 ## Hardening and stakeholder expectations
 
 - **`FrameLabel`:** **`surface="auto-pa2"`** on DHU car frames uses a **teal badge** and documents that PA2 accents illustrate **session/metadata identity**; **`surface="auto"`** keeps a **neutral** badge for strict host-only messaging.

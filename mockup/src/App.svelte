@@ -6,6 +6,7 @@
   import HomePage from './lib/HomePage.svelte'
   import DesignSystemPage from './lib/DesignSystemPage.svelte'
   import ResearchPage from './lib/ResearchPage.svelte'
+  import ArchitecturePage from './lib/ArchitecturePage.svelte'
   import SiteNav from './lib/SiteNav.svelte'
   import { parseHash, type AppRoute } from './lib/hash-routes'
   import { browseSectionFromFrame, isAutoBrowseFrameId } from './lib/browse-section'
@@ -45,6 +46,8 @@
   <DesignSystemPage {route} />
 {:else if route.name === 'research'}
   <ResearchPage {route} />
+{:else if route.name === 'architecture'}
+  <ArchitecturePage />
 {:else if route.name === 'mockup'}
   <div class="mockup-page">
     <header class="mockup-top">

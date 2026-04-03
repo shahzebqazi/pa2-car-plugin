@@ -43,6 +43,7 @@
 
     <nav class="nav" aria-label="Site sections">
       <a class="nav-btn primary" href="#/mockup">Mockups</a>
+      <a class="nav-btn" href="#/architecture">Architecture</a>
       <a class="nav-btn" href="#/design">Auto design</a>
       <a class="nav-btn" href="#/research">UX research</a>
       <a
