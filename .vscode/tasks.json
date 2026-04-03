@@ -1,0 +1,59 @@
+{
+  "version": "2.0.0",
+  "tasks": [
+    {
+      "label": "AA: DHU (USB)",
+      "type": "shell",
+      "command": "${workspaceFolder}/android-auto-agents/scripts/dhu-start.sh",
+      "options": {
+        "cwd": "${workspaceFolder}",
+        "env": {}
+      },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "AA: DHU (USB + auto retry)",
+      "type": "shell",
+      "command": "${workspaceFolder}/android-auto-agents/scripts/dhu-start.sh auto",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": [],
+      "presentation": {
+        "reveal": "always",
+        "panel": "dedicated"
+      }
+    },
+    {
+      "label": "AA: Plugin — unit test",
+      "type": "shell",
+      "command": "${workspaceFolder}/android-auto-agents/scripts/gradle-plugin-template.sh :app:testDebugUnitTest",
+      "options": { "cwd": "${workspaceFolder}", "env": { "PA2_PLUGIN_GRADLE_ROOT": "${workspaceFolder}/PowerAmpache2PluginTemplate" } },
+      "group": "test",
+      "problemMatcher": []
+    },
+    {
+      "label": "AA: Mockup — build + check",
+      "type": "shell",
+      "command": "${workspaceFolder}/android-auto-agents/scripts/mockup-verify.sh",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "AA: adb devices",
+      "type": "shell",
+      "command": "${workspaceFolder}/android-auto-agents/scripts/adb-devices.sh",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    },
+    {
+      "label": "AA: Plugin installDebug",
+      "type": "shell",
+      "command": "${workspaceFolder}/android-auto-agents/scripts/adb-plugin-install-debug.sh",
+      "options": { "cwd": "${workspaceFolder}" },
+      "problemMatcher": []
+    }
+  ]
+}

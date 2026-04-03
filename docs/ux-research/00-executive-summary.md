@@ -5,7 +5,7 @@
 
 ## Purpose
 
-Summarize an **evidence-oriented** baseline for **safe, low-friction** music use on **Android Auto**, aligned with **Google’s media-for-cars** guidance. The production integration path is **Power Ampache 2** with **Media3** (`MediaSession` + `MediaSessionService` and media-browser discovery in the manifest). The **Car App Library** sample in this sandbox repo is for learning only; it is **not** how PA2 ships car UI.
+Summarize an **evidence-oriented** baseline for **safe, low-friction** music use on **Android Auto**, aligned with **Google’s media-for-cars** guidance. **Shipping** host media is **Power Ampache 2** with **Media3** (`MediaSession` + `MediaSessionService` and media-browser discovery in the manifest — confirm **browse** depth in upstream; see [01-platform-constraint-sheet.md](01-platform-constraint-sheet.md)). This workspace’s root **`app`** is a **phone Compose** reference only; **PowerAmpache2PluginTemplate** is **phone** + local **ExoPlayer**, **not** an Auto media app in manifest today. **Android Auto** UI is **host-rendered** from **Power-Ampache-2**’s **Media3** integration.
 
 ## Key findings
 
@@ -23,7 +23,7 @@ Summarize an **evidence-oriented** baseline for **safe, low-friction** music use
 
 - Prioritize browse roots: **continue listening**, **recents**, **playlists** before deep **artist → album** paths.
 - Exercise **voice** flows and **error** surfacing on the **Desktop Head Unit** and, when possible, a real vehicle.
-- Label mockups by surface: **phone (PA2 theme)** vs **host media** vs **sandbox Car App Library**.
+- Label mockups by surface: **phone (PA2 theme)** vs **host media** vs **plugin Auto** — this repo has **no** root Compose app (use **mockup/** and **Power-Ampache-2** for phone reference).
 
 ## Full detail
 

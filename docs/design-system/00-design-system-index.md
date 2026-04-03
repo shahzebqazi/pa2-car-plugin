@@ -54,7 +54,7 @@ The Vite + Svelte app shows **two labelled surfaces**: **Phone — PA2 theme** (
 
 ## Optional tools
 
-- **Markdown in-repo** is the canonical **documentation** for this sandbox.
+- **Markdown in-repo** is the canonical **documentation** for this workspace.
 - **Figma** (or similar) may be added later; keep tokens synced from `PowerAmpache2Theme` and this folder.
 
 ## Related plugins

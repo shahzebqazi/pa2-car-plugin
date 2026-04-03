@@ -7,9 +7,9 @@ This document reconciles phases **A–D** into one narrative and calls out **tra
 ## 2. Platform reality (Phase A)
 
 - **PA2** ships **`SimpleMediaService` : `MediaSessionService`** with a **`MediaSession`** and manifest intent filters for **legacy media browser** discovery — the same **family** of integration described in [Create audio media apps](https://developer.android.com/training/cars/media). Whether **full library browse** is implemented in upstream must be **verified in code** (see caveat in [01-platform-constraint-sheet.md](01-platform-constraint-sheet.md)).
-- **Sandbox** `android-auto` uses **`androidx.car.app`** for learning; it is **not** PA2 production behaviour.
+- This **android-auto** umbrella repo uses **`mockup/`** for phone + Auto hierarchy; **Media3** / **DHU** validation uses **Power-Ampache-2** and/or **PowerAmpache2PluginTemplate** APKs, not a root **`app`** module (removed).
 
-**Tradeoff:** Template-based prototypes **look** customizable but **misrepresent** PA2’s car UX unless explicitly labelled.
+**Tradeoff:** Anything that **looks** like custom head-unit chrome can **misrepresent** PA2’s **host-rendered** car UX unless labelled (**Auto — host media** in mockups).
 
 ## 3. Driver tasks and music patterns (Phase B)
 
@@ -49,6 +49,8 @@ This document reconciles phases **A–D** into one narrative and calls out **tra
 2. **Multi-account** in car: block, merge roots, or “last used only”?
 3. **Lyrics** on Auto: disabled in motion vs OEM-dependent?
 4. **Classical** deep hierarchy: acceptable exception with voice?
+
+**Workspace proposals (Mar 2026, non-binding):** (1) Ship **clear errors** via `MediaSession` / browse first; **offline badge** only with a stable host API for it. (2) **Last-used** account for template-style builds; richer policy in **Power-Ampache-2**. (3) **No lyrics** in motion; parked-only if ever exposed. (4) **Voice-first** for classical deep trees; keep shallow **default** browse for driving.
 
 ## 8. Risks (from research plan, risk section)
 

@@ -188,4 +188,4 @@ Replace or extend with **Media3** / **MediaBrowserService** docs if the upstream
 
 ---
 
-*Last updated: created with this sandbox repo; revise dates and “last reviewed” when you complete each phase.*
+*Last updated: created with this workspace; revise dates and “last reviewed” when you complete each phase.*

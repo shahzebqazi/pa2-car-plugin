@@ -37,7 +37,7 @@ Use these consistently so reviewers know which stack they are looking at.
 |-------|-------------|
 | **Phone — PA2 theme** | Handheld UI using colors and type from [../design-system/01-brand-and-language.md](../design-system/01-brand-and-language.md) |
 | **Auto — host media (PA2)** | **Pattern only** for host-rendered lists and now playing; not PA2-branded chrome |
-| **Sandbox — Car App Library** | Kotlin sample under `app/` in this repo only; **not** PA2 production |
+| **Phone — PA2 reference (Compose)** | Root `app/` Compose shell; handheld reference, **not** the **Media3** car APK |
 
 ## 4. What mockups should include
 
@@ -46,6 +46,14 @@ Use these consistently so reviewers know which stack they are looking at.
 - A short **note where the design diverges** from media-browser constraints, if it does.
 
 ## 5. Engineering checklist (Kotlin / Media3)
+
+**This workspace (root + plugin template)**
+
+- [x] **Root `app`:** Compose **Phone — PA2** reference (design-system colours, now-playing shell aligned with **`mockup/`** phone frame: top bar, art placeholder, seek block with **Slider** + times); **no** `androidx.car.app`; **not** a **DHU** media target.
+- [x] **Plugin template `app`:** Ampache-driven **artist → album → queue** and album/playlist queue load with user-visible error rows; queue playback via Media3 **ExoPlayer** when `Song.songUrl` is set (else simulated); unit tests use `SimulatedQueuePlaybackEngine`. **Android Auto / DHU:** **`PluginMediaLibraryService`** (Media3 **`MediaLibrarySession`**) + manifest **`car.application`** and legacy **`MediaBrowserService`** discovery — see **`PowerAmpache2PluginTemplate/app/src/main/AndroidManifest.xml`** and **`AGENTS.md`**.
+- [x] **DHU / Auto validation:** **Power-Ampache-2** (or any APK that registers as a media app on the head unit).
+
+**Power-Ampache-2 (upstream — confirm in [Power-Ampache-2](https://github.com/icefields/Power-Ampache-2))**
 
 - [ ] `MediaItem` hierarchy respects guardrail **depth** goals.
 - [ ] `MediaSession` callbacks complete for **transport** controls.
@@ -57,8 +65,8 @@ Use these consistently so reviewers know which stack they are looking at.
 
 See [07-research-synthesis.md](07-research-synthesis.md) (section on open questions). Track decisions here:
 
-| Question | Decision | Date |
-|----------|----------|------|
-| Offline badge on Auto | TBD | — |
-| Multi-account in car | TBD | — |
-| Lyrics policy | TBD | — |
+| Question | Proposed (workspace notes) | Maintainer decision | Date |
+|----------|--------------------------|----------------------|------|
+| Offline badge on Auto | Prioritize **session error** strings; badge only if product + API support | TBD | — |
+| Multi-account in car | **Last-used server** only in template; full account UX on phone / upstream PA2 | TBD | — |
+| Lyrics policy | **Disabled while driving** unless upstream enables parked-only; align with OEM | TBD | — |

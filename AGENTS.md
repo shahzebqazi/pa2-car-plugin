@@ -1,175 +1,165 @@
 # Agent instructions — Android Auto (Power Ampache 2)
 
-This document defines how specialized agents should work in this workspace.
-
-**Sandbox vs upstream:** The **root of this directory** (`android-auto`) is a **sandbox**: the sample Gradle app, agent notes, and prototypes live here. The **canonical Power Ampache / integration codebase** is **not** this tree alone—it is expected as a **Git clone in a subdirectory** of this folder (e.g. `Power-Ampache-2/`). **Reference upstream:** [github.com/icefields/Power-Ampache-2](https://github.com/icefields/Power-Ampache-2); theme module submodule: [github.com/icefields/PowerAmpache2Theme](https://github.com/icefields/PowerAmpache2Theme). Work you intend to **merge upstream** happens in that clone (branches, PRs); the sandbox is for spikes, mockups, and the Car App Library sample unless you explicitly copy or integrate.
-
-The sandbox Android app uses **Gradle + Kotlin** and the **Android for Cars App Library** (see `README.md`). **Production Power Ampache 2** uses **Media3** (`MediaSession` + `MediaSessionService`); Android Auto UX for PA2 follows **Google’s media-for-cars** (host-rendered) model, **not** the sandbox’s templated `androidx.car.app` sample unless a task says otherwise.
+How specialized agents work in this workspace. **Deep sections** live under [`docs/agents/`](docs/agents/README.md) so this file stays maintainable.
 
 ---
 
-## Shared context for all agents
+## Maintaining this document (compression and sharding)
 
-- **Sandbox app (this repo root)**: Kotlin under `app/src/main/`, car UI under `app/src/main/java/.../car/`, tests under `app/src/test/` and `app/src/androidTest/`.
-- **Upstream clone (subdirectory)**: After `git clone <maintainer-repo-url> <dir>`, do feature work and open PRs from **that** repository’s working tree. Keep the sandbox and the clone mentally separate unless a task says to wire them together.
-- **Build and verify**: `./gradlew assembleDebug`, `./gradlew testDebugUnitTest`, `./gradlew connectedDebugAndroidTest` (device/emulator for instrumented tests).
-- **Android Auto testing**: Desktop Head Unit (DHU), category rules, and host validation are described in `README.md`.
-- **Safety and compliance**: In-car UI must respect driver distraction guidelines (e.g. glanceability, limited interaction depth, no unsafe patterns). Research and mockups should align with platform constraints, not fight them.
-- **Mockup app (`mockup/`):** Vite + Svelte, **hash routes**: `#/` **home** (DHU reference image from `public/dhu/` when present, nav to other sections), `#/design` (**Android Auto** implementation focus: embedded `docs/ux-research/01-platform-constraint-sheet.md` + `docs/design-system/00-design-system-index.md`; **phone** theme tokens in a collapsible reference), `#/research` (expandable sections with inlined markdown for `00-executive-summary`, `07-research-synthesis`, `02-task-analysis-and-flows`, `08-mockup-handoff-package`), `#/mockup` and `#/mockup/<frame>`. Mockup frames cover **Phone — PA2 theme** and **Auto — host media** only; the **Car App Library** sample is the Kotlin app under `app/.../car/` (DHU), not duplicate browser wireframes. **`public/dhu/`** PNGs remain optional assets for the home hero and comparison with a real head unit.
-- **Public sandbox mirror (optional):** This workspace may be published as **[github.com/shahzebqazi/pa2-car-plugin](https://github.com/shahzebqazi/pa2-car-plugin)** with the mockup built to **GitHub Pages** (see root `README.md`, `.github/workflows/deploy-github-pages.yml`). That mirror is for review and docs; **upstream PA2 PRs** still target the maintainer clone (`Power-Ampache-2/`), not this repo alone.
+**Triggers — do one of the following when:**
 
-### Phone companion — player design direction
+- **`AGENTS.md` exceeds ~350–400 lines**, or
+- The same guidance is **copy-pasted** in multiple places, or
+- A topic (**DHU**, **roles**, **PRD**) needs **heavy edits** without bloating the root file.
 
-Applies to **Power Ampache 2 phone / full-screen player** and the **`mockup/`** **Phone — PA2 theme** now-playing frame (`mockup/src/lib/PhoneNowPlaying.svelte`). **Not** a description of Android Auto’s **host-rendered** media UI unless a task explicitly scopes a custom in-car surface.
+**Allowed strategies (pick one per change set; update links when done):**
 
-- **Blurred zoom-fill background:** Drive the player backdrop from the current track’s **album artwork** — **scale to cover** the viewport, **blur** (heavy enough to read as texture, not sharp detail), and add a **dark or scrim overlay** so title, artist, and controls keep contrast. When art is missing, fall back to theme **surface / gradient** from [`docs/design-system/01-brand-and-language.md`](docs/design-system/01-brand-and-language.md).
-- **Smooth motion:** Use **short, smooth** transitions for artwork and metadata changes, play/pause affordances, and sheet / control visibility. **Respect system reduced-motion** (and equivalent accessibility settings); provide a non-animated or minimal path when reduced motion is on.
-- **Gestures:** Specify **touch gestures** for the phone player where product intent allows — e.g. **drag / horizontal scrub** on the seek region, **swipe** for next/previous or auxiliary actions, coordinated with hit targets in [`docs/design-system/02-layout-and-navigation.md`](docs/design-system/02-layout-and-navigation.md). Call out that **Android Auto** remains **host-controlled** for the media path; gestures there follow OEM/host behaviour, not custom PA2 chrome.
-- **Scrub visualizer:** Along the **playback scrubber** (seek bar + playhead), a **waveform- or wave-generated** visual treatment (organic wave geometry, not only a flat progress tint) can provide a **visual anchor** for scrubbing and optional tie-in to position or audio character per engineering. In **`mockup/`**, the **reference** illustration for that pattern lives on the **Auto — host media** now-playing frame (`AutoNowPlaying.svelte`) as an exploratory, host-adjacent mock (real projected UI is OEM-dependent). The **Phone — PA2 theme** now-playing frame (`PhoneNowPlaying.svelte`) uses a **standard seek bar** plus phone gestures. Validate **motion and density** against [`docs/ux-research/05-design-guardrails-checklist.md`](docs/ux-research/05-design-guardrails-checklist.md) if a variant is ever considered outside parked / phone-only contexts.
+1. **Shard** — Move a topic to **`docs/agents/<nn>-<topic>.md`**, keep a **short summary + link** here, and add the file to [`docs/agents/README.md`](docs/agents/README.md).
+2. **Compress** — Replace a long subsection with **bullet constraints** and a **“see shard”** link; do not delete unique requirements.
+3. **Optional one-pager** — If coordinators want a **minimal** entry, add **`docs/agents/AGENTS-compact.md`** (or similar) as a **checklist-only** view; **`AGENTS.md` remains normative** unless humans demote it.
 
-**Handoff (phone player):** Mockup developer implements and refines the above in Svelte; researcher notes distraction / a11y implications; development swarm implements in **upstream** Compose (`Power-Ampache-2/`) against tests and theme module.
-
-### Car (Android Auto) — now-playing redesign
-
-Use this when improving **what drivers experience on the head unit** for PA2 over the **Media3 / host-rendered media** path (not the sandbox **Car App Library** templates unless the task explicitly scopes templated UI).
-
-- **What the app controls:** **MediaSession** behaviour, **MediaMetadata** (title, artist, album, display fields), **artwork** (uris, sizing per platform guidance), **PlaybackState** (position, actions, errors), and **queue** semantics where the host exposes them. Prefer one **glanceable primary line** plus a short secondary; align with [`docs/ux-research/02-task-analysis-and-flows.md`](docs/ux-research/02-task-analysis-and-flows.md), [`docs/ux-research/07-research-synthesis.md`](docs/ux-research/07-research-synthesis.md) §6 (now playing row), and [`docs/ux-research/05-design-guardrails-checklist.md`](docs/ux-research/05-design-guardrails-checklist.md). Official integration references: [Create audio media apps](https://developer.android.com/training/cars/media), [Errors in car media apps](https://developer.android.com/training/cars/media/errors).
-- **What the host controls:** **Typography, colors, control layout, and scrubber appearance** on standard Android Auto media UI are **OEM / host** decisions. Do not treat `mockup/src/lib/AutoNowPlaying.svelte` (`#/mockup/auto-np`) as a pixel spec for production—use it to **communicate information hierarchy and optional embellishments** (e.g. wave-style scrub exploration) to engineers and reviewers; validate on **DHU** and **real devices** where possible.
-- **Constraints reminder:** [`docs/ux-research/01-platform-constraint-sheet.md`](docs/ux-research/01-platform-constraint-sheet.md) — deep custom layouts are not the lever on the media-browser path; focus on **data quality, shallow cognitive load, and stable session state**.
-- **Where code ships:** Session and metadata work belongs in **`Power-Ampache-2/`** (Media3), not in the sandbox `app/.../car/` sample unless deliberately prototyping templates.
-
-**Handoff (car now-playing):** Refine **`AutoNowPlaying.svelte`** + `FrameLabel` notes for clarity; researcher flags guardrail / distraction issues; development swarm updates **upstream Media3** metadata, artwork, and playback reporting, then verifies **DHU and at least one device/OEM** snapshot.
-
-### Mockup site — format and information design
-
-Agents **reviewing or editing** the **`mockup/`** Vite + Svelte app should keep **layout and hierarchy** easy to scan for stakeholders:
-
-- **Global:** Each route has a clear **H1** and a short **lead** before long copy or embeds. **Nav** (`SiteNav.svelte`) matches page intent (**Auto design**, **UX research**, **Mockups**). Hash routes in [`mockup/src/lib/hash-routes.ts`](mockup/src/lib/hash-routes.ts) stay in sync with the UI.
-- **Mockup route (`#/mockup`):** Explanatory text and **P0–P3** chips sit **beside** the preview on wide viewports; **one capped preview width** so phone and car frames feel comparable; tall phone mockups **scroll inside** the preview card (`App.svelte`). Avoid accidental full-viewport overflow.
-- **Research route:** Expandable cards show **title, blurb, and source path** before inlined markdown; prose styling in **`mockup/src/lib/md-prose.css`** must keep **tables, `pre`/code, and links** readable at mobile widths.
-- **Design route:** **Android Auto implementation** content is primary; **phone theme** swatches stay in the **collapsible** reference section so car vs phone is obvious on first scan.
-- **Frame chrome:** `FrameLabel` uses **`surface="phone"`** (PA2 primary on the badge) vs **`surface="auto"`** (neutral badge/background) so **Auto — host media** previews are not mistaken for PA2-teal head-unit branding. This strip is **reviewer UI** only.
-- **Reduced motion:** Gate decorative **CSS transitions and animations** with **`prefers-reduced-motion`** where practical (home nav, phone/auto player mockups), per [`docs/ux-research/06-accessibility-matrix.md`](docs/ux-research/06-accessibility-matrix.md).
-- **Quality bar:** After substantive UI changes, run **`npm run build`** and **`npm run check`** under `mockup/`. For **GitHub Pages**, set **`VITE_BASE_PATH`** to the repo subpath so assets resolve (`mockup/vite.config.ts`). Browser mockups **illustrate** guardrails; they do **not** replace Play / DHU / device verification ([`docs/ux-research/05-design-guardrails-checklist.md`](docs/ux-research/05-design-guardrails-checklist.md)).
+**Rules:** After sharding, **do not** leave contradictory copies — one normative home per topic. **PR backlog + workspace snapshot** normatively live in [`docs/agents/01-prd-and-backlog.md`](docs/agents/01-prd-and-backlog.md).
 
 ---
 
-## 1. UX / UI researcher
+## Tech-lead reset (read before coding)
 
-**Role**: Compile evidence-backed research on **driving music app** interfaces, **accessibility** in automotive and mobile contexts, and **safety / distraction** guidance.
-
-**Research plan**: See [`docs/android-auto-ux-research-plan.md`](docs/android-auto-ux-research-plan.md) for phased goals, workstreams (driver UX, safety, accessibility), methods, deliverables, and risks.
-
-**Responsibilities**
-
-- Survey patterns for in-car and projected music UIs: information hierarchy (now playing, queue, browse), touch vs. rotary/voice assumptions, and Android Auto / Automotive OS constraints where relevant.
-- Summarize **accessibility**: large targets, contrast, motion reduction, screen reader / TalkBack considerations for companion phone UI vs. projected car UI limits.
-- Collect **safety and regulatory / guideline** references: OEM HMI guidelines, academic or industry reports on cognitive load while driving, and official Android for Cars documentation on templates and restricted interactions.
-
-**Outputs**
-
-- Structured briefs (markdown): executive summary, findings with **citations** (title, publisher, date, URL), and **actionable design implications** for this project (bullets tied to car screens and phone app where applicable).
-- Optional: comparison tables (e.g. browse depth, primary actions per screen, typography scale).
-- Flag gaps or contradictions in sources instead of smoothing them over.
-
-**Constraints**
-
-- Prefer primary sources and recent guidelines; label speculation clearly.
-- Do not recommend UI patterns that violate Android Auto template limits or obvious distraction risks.
+- **Portfolio vs plugin:** Umbrella repo (**`mockup/`**, **`docs/`**, **`android-auto-agents/`**) vs **nested plugin fork** — remotes, what ships to **icefields**, agent rules (no **`data`/`domain`** without explicit scope; GitHub comments require human yes). See [`docs/agents/08-portfolio-and-pr-policy.md`](docs/agents/08-portfolio-and-pr-policy.md).
+- **`PowerAmpache2PluginTemplate/`** — **Your fork** (**`origin`**); **`upstream`** remote URL = **icefields/PowerAmpache2PluginTemplate** (sync **branches** such as **`plugin/AndroidAuto`** or **`main`** — not a path inside the repo). **`PowerAmpache2PluginTemplateOld/`** — quarantined prior experiment; **do not** treat as source of truth.
+- **Mockups were wrong** when they framed the **plugin** as the **full phone app**. Rebuild **`mockup/`** (after umbrella/fork merge per **08**) so **handheld / player / library** scenarios depict **[Power-Ampache-2](https://github.com/icefields/Power-Ampache-2)**; use **plugin** framing for **Android Auto / Media3** and thin plugin-specific surfaces only. **PA2-Theme:** consume read-only; do not commit into a fresh theme tree. Details: [`docs/agents/03-mockups-and-design.md`](docs/agents/03-mockups-and-design.md).
+- **Boundaries:** **Default plugin template `app/` only** unless the task **explicitly** includes **`data`/`domain`**. Prefer **`domain/.../model/mocks/`** and **test fakes** for presentation work until integration is specified.
+- **Branch `plugin/AndroidAuto`:** On **your fork** (**`origin`**). Sync maintainer **`main`** via **`git fetch upstream && git merge upstream/main`** while checked out on **`plugin/AndroidAuto`** (see [`docs/agents/01-prd-and-backlog.md`](docs/agents/01-prd-and-backlog.md)).
 
 ---
 
-## 2. UI mockup developer (Svelte + Cursor MCP + skills)
+## Document map
 
-**Role**: Build **disposable or prototype** UI mockups in **Svelte** (and TypeScript where appropriate) to explore layout, flow, and visual hierarchy before or alongside Kotlin/Car App implementation.
+| Need | Read |
+|------|------|
+| PRD table, snapshot, reset context | [`docs/agents/01-prd-and-backlog.md`](docs/agents/01-prd-and-backlog.md) |
+| DHU, USB, car validation | [`docs/agents/02-dhu-and-car-testing.md`](docs/agents/02-dhu-and-car-testing.md) |
+| Mockup rules (PA2 phone vs plugin) | [`docs/agents/03-mockups-and-design.md`](docs/agents/03-mockups-and-design.md) |
+| Roles (expanded) | [`docs/agents/04-roles-detailed.md`](docs/agents/04-roles-detailed.md) |
+| Integrity, tests, proof | [`docs/agents/05-integrity-and-tests.md`](docs/agents/05-integrity-and-tests.md) |
+| Template Gradle / module map | [`docs/agents/06-plugin-template-hotspots.md`](docs/agents/06-plugin-template-hotspots.md) |
+| Plugin Auto UI handoff (SDK + DHU) | [`docs/agents/07-handoff-plugin-ui-dhu.md`](docs/agents/07-handoff-plugin-ui-dhu.md) |
+| Portfolio / fork PR policy (umbrella vs icefields) | [`docs/agents/08-portfolio-and-pr-policy.md`](docs/agents/08-portfolio-and-pr-policy.md) |
+| UX research — executive summary, platform constraints, mockup handoff | [`docs/ux-research/00-executive-summary.md`](docs/ux-research/00-executive-summary.md), [`docs/ux-research/01-platform-constraint-sheet.md`](docs/ux-research/01-platform-constraint-sheet.md), [`docs/ux-research/08-mockup-handoff-package.md`](docs/ux-research/08-mockup-handoff-package.md) |
+| Workflows, roles, MCP stubs | [`android-auto-agents/README.md`](android-auto-agents/README.md) |
 
-**Car now-playing + mockup site:** For **host now-playing** redesign goals and **mockup website** layout/copy standards, follow **Shared context** → **Car (Android Auto) — now-playing redesign** and **Mockup site — format and information design**.
-
-**Handoff package (start here):** The UX research phase and design system are **ready for mockup work**. Read in order:
-
-1. [`docs/ux-research/08-mockup-handoff-package.md`](docs/ux-research/08-mockup-handoff-package.md) — prioritized scenarios (P0–P3), labelling rules, engineering checklist.
-2. [`docs/ux-research/01-platform-constraint-sheet.md`](docs/ux-research/01-platform-constraint-sheet.md) — **PA2 vs sandbox**: production Auto UI is **host-rendered media** (Media3 path), not the sandbox **Car App Library** sample; note the **browse implementation caveat** before assuming a full library tree on the head unit.
-3. [`docs/design-system/00-design-system-index.md`](docs/design-system/00-design-system-index.md) and [`docs/design-system/01-brand-and-language.md`](docs/design-system/01-brand-and-language.md) — **phone** surfaces use **PowerAmpache2Theme** (Nunito, M3 tokens); **Android Auto** chrome does **not** inherit PA2 hex colours for the media-browser path.
-4. [`docs/ux-research/05-design-guardrails-checklist.md`](docs/ux-research/05-design-guardrails-checklist.md) — embed in prototypes where relevant.
-
-Full index: [`docs/ux-research/README.md`](docs/ux-research/README.md).
-
-**Responsibilities**
-
-- Implement mockups using project-agreed tooling: **Svelte** for components and interactivity; **Cursor MCP** (e.g. browser, Figma) and **agent skills** as specified in the session (e.g. Svelte MCP, `svelte-typescript-frontend`, `ui-mockup-html` only when static HTML is explicitly preferred).
-- **Label every frame** per `08-mockup-handoff-package.md`: **Phone — PA2 theme** vs **Auto — host media (PA2)** in the browser mockup. The **Car App Library** flow is the **Kotlin** sample under `app/.../car/` (exercise in **DHU**); do not reintroduce redundant Svelte clones of that flow unless the handoff package is explicitly revised.
-- Reflect researcher output: typography, spacing, safe touch targets, and minimal steps for common tasks (play/pause, skip, simple browse). Use **design-system** spacing/type tokens for **phone** mockups; for **Auto**, show **generic** list/now-playing patterns (metadata density, short titles), not PA2-branded chrome.
-- For **phone now-playing**, follow **Shared context → Phone companion — player design direction** (blurred art backdrop, smooth motion with reduced-motion awareness, gestures, standard seek bar in the mockup); keep `PhoneNowPlaying.svelte` as the living reference. **Wave-style scrub** exploration: `AutoNowPlaying.svelte`.
-- When mockups target the **sandbox** `androidx.car.app` flow, stay aligned with **templates and list limits**; when they target **PA2 on Auto**, align with **media browser** constraints from Google’s docs, not custom templates.
-
-**Outputs**
-
-- Runnable Svelte pages or components under a dedicated folder (e.g. `mockup/` or `design-prototype/` at repo root—create if the task owner agrees).
-- Short `README.md` in that folder: purpose, map to car vs phone screens, links to `08-mockup-handoff-package.md` and `docs/design-system/00-design-system-index.md`.
-
-**Constraints**
-
-- Match existing skill and MCP workflows in Cursor (validate Svelte code with official Svelte tooling when available).
-- Do not replace production car UI in Kotlin unless explicitly asked; mockups inform implementation, they are not the shipping Android Auto surface by themselves.
+Cursor routing: [`.cursor/rules/android-auto-agents.mdc`](.cursor/rules/android-auto-agents.mdc).
 
 ---
 
-## 3. Development and testing swarm
+## Agent swarm (short)
 
-**Role**: **Implement and maintain code** according to **specifications and unit tests** defined by the project owner; treat tests as the contract unless a spec explicitly overrides them.
+Use a **swarm** model: one **coordinator**, shared backlog in **`docs/agents/01-prd-and-backlog.md`**, **`android-auto-agents/`** for workflows.
 
-**Responsibilities**
+| Role | Responsibility |
+|------|----------------|
+| **Coordinator** | Boundaries, merge targets, done criteria (tests + **DHU** for car work). |
+| **UX researcher** | Evidence, guardrails — [`docs/android-auto-ux-research-plan.md`](docs/android-auto-ux-research-plan.md). |
+| **Mockup developer** | **`mockup/`** — **PA2 = phone**, plugin = Auto slice ([`03-mockups-and-design.md`](docs/agents/03-mockups-and-design.md)). |
+| **Development swarm** | Kotlin / tests — **mock use cases + fakes** until wired; **`app/`** default ([`04-roles-detailed.md`](docs/agents/04-roles-detailed.md)). |
 
-- Read the **spec** (issue, doc, or comment thread) and the **tests** (JUnit under `app/src/test/`, Android tests under `app/src/androidTest/`) before writing production code.
-- Write the **minimal Kotlin (and resources)** needed to make defined tests pass and satisfy the spec; extend tests only when required for missing edge cases agreed with the owner.
-- Run **`./gradlew testDebugUnitTest`** (and instrumented tests when the task touches UI or integration) and fix failures before handing off.
-- When working against the **cloned upstream repo** (subdirectory), follow its build, modules, and contribution rules; consume shared logic there via the project’s chosen integration (composite build, Git submodule, Maven artifact, etc.) and avoid duplicating integration logic in the sandbox app unless the spec says otherwise.
+### Parallel tracks
 
-**Outputs**
+| Track | Scope | Avoid |
+|-------|--------|--------|
+| **Presentation** | **`mockup/`**, **`docs/`** | Changing template Kotlin without coordination. |
+| **Code** | Template **`app/`**, tests | Rewriting **`mockup/`** unless fixing factual errors. |
 
-- Focused commits or patches: production code + tests as specified.
-- Brief note of what was implemented, which tests were added or updated, and any Android Auto / DHU verification performed.
+**Swarm rules:** Single backlog source; no silent cross-repo assumptions (**upstream-only** when **Power-Ampache-2** not cloned); mockup → TDD → DHU for mockup-driven UI; cite **`gradle-plugin-template.sh`** (nested plugin) and **`npm run check`** when claiming green; see [`05-integrity-and-tests.md`](docs/agents/05-integrity-and-tests.md). **Issues/comments:** no new GitHub comments without the human’s prior yes ([`08`](docs/agents/08-portfolio-and-pr-policy.md)).
 
-**Constraints**
+### Presentation shipping loop (standing until presentation-layer ship)
 
-- Do not weaken or delete tests to green the build without explicit owner approval.
-- Respect `HostValidator` and security notes in `README.md` for release-bound changes.
-- Prefer small, reviewable changes; large refactors only when the spec demands them.
+**Priority:** Start or continue **mockup** work in **`mockup/`** first (IA and screens) per [`03-mockups-and-design.md`](docs/agents/03-mockups-and-design.md) — **Power Ampache 2 = phone**, **plugin = Android Auto / Media3** slice, not a second full phone shell.
 
----
+**Perpetual cadence:** Keep a **repeatable loop** until presentation-layer quality is shippable: **mockup → plugin template `app/` + tests + pure catalog helpers + Auto mock polish + small doc updates → human DHU pass**. Iterate; do not wait for a single “big bang” integration.
 
-## Coordination
+**DHU — human in the loop:** After meaningful **Android Auto / Media3** changes (browse, now playing chrome, errors, session wiring that affects the host), agents **must periodically prompt the maintainer to inspect in DHU** (USB Desktop Head Unit — [`02-dhu-and-car-testing.md`](docs/agents/02-dhu-and-car-testing.md), repo root **`./android-auto-agents/scripts/dhu-start.sh`** / **`… auto`**). Automated tests alone are not enough for car UX. File feedback against the existing **DHU bug-catalog** rules in this file (structured pass; no invented bugs).
 
-| Handoff | From | To |
-|--------|------|-----|
-| Research brief | UX/UI researcher | Mockup developer + development swarm |
-| Mockup / flow | Mockup developer | Development swarm (Kotlin car UI / phone UI) |
-| API / integration / PR target | Cloned repo in workspace subdirectory (e.g. `Power-Ampache-2/`) | Development swarm |
+**In scope for this loop**
 
-When tasks conflict (e.g. mockup suggests a pattern the car library cannot support), the **development swarm** should document the constraint and the **researcher** or **mockup** agent should revise recommendations.
+| Area | Work |
+|------|------|
+| **Mockup** | Rebuild/align Svelte mockup with PA2 vs plugin framing; **`npm run check`**. |
+| **Plugin `app/`** | Layout fixes; **mock/demo paths** (e.g. `useMock`, debug flags); **stubbed local playback UX** (clearly non-production); a11y/strings/theme polish. |
+| **Tests** | `app/src/test` / `androidTest` with **fakes**; JVM tests for **`MediaLibraryCatalog`** and other pure logic in **`app/`**. |
+| **Auto (mock-backed)** | **`PluginMediaLibraryService`**, **`MediaLibraryCatalog`**, **`MediaItemFactory`** polish **without** live **`MusicFetcher`** / IPC. |
+| **Docs** | Targeted updates to **`docs/agents/`** or root **README** when behaviour or entry points change. |
 
----
+**Deferred (do not block this loop)**
 
-## Updating this file
+- Maintainer **dev PA2 APK** and **host-app** code that feeds **`PA2DataFetchService`**.
+- Real **`MusicFetcher`** / **`data`/`domain`** / IPC implementation — **upstream maintainer** scope unless a task **explicitly** includes it.
 
-When the maintainer’s repository is cloned here, update **Shared context** with:
-
-- **Remote URL** and **local directory name** (the clone path under this sandbox). If using submodules, note theme repo path (e.g. `Power-Ampache-2/PowerAmpache2Theme/`).
-- How the sandbox sample app relates to the clone (independent, or linked build)—if at all.
-
-Keep all three agent types aligned on which tree is PR-bound vs sandbox-only.
-
-**Note:** `Power-Ampache-2/` may be gitignored in this sandbox; clones for research/theme extraction are still valid local paths for agents.
+**Boundary:** This loop **authorizes** ongoing **`PowerAmpache2PluginTemplate/app/`** edits that stay **presentation-only**. The parallel **Presentation** track above still means: do not rewrite **`mockup/`** for fun — only to fix IA or factual errors; coordinate if another agent owns the same screens.
 
 ---
 
-## Learned User Preferences
+## New agent onboarding (checklist)
 
-- When executing work from an attached plan, treat the plan file as read-only unless the user explicitly asks to revise that document (e.g. do not edit `docs/android-auto-ux-research-plan.md` during implementation passes).
-- If todos for a plan already exist in the session, advance those items in order instead of creating a parallel duplicate list.
-- Ground phone and companion UI mockups in **PowerAmpache2Theme** and related authoritative theme sources (theme module or sibling repos the maintainer references), not one-off invented palettes.
+| Step | Action |
+|------|--------|
+| **1. Scope** | Target **`PowerAmpache2PluginTemplate/app`** (primary), **`mockup/`**, **`docs/`**, or **upstream-only**. Ignore **`PowerAmpache2PluginTemplateOld/`** unless the human points you there for archaeology. |
+| **2. Read** | This file + **Document map** shards for your task + [`.cursor/rules/android-auto-agents.mdc`](.cursor/rules/android-auto-agents.mdc). |
+| **3. Gradle** | **Plugin Auto:** set **`PA2_PLUGIN_GRADLE_ROOT`** to nested **`PowerAmpache2PluginTemplate/`** and use **`./android-auto-agents/scripts/gradle-plugin-template.sh`** (see **`android-auto-agents/README.md`**). This umbrella repo has **no** root `./gradlew`. |
+| **4. Verify** | Paste command results; **DHU** from repo root: **`./android-auto-agents/scripts/dhu-start.sh`**. |
+| **5. Boundaries** | **`app/`** only by default; **no `data`/`domain`** without explicit task. |
 
-## Learned Workspace Facts
+---
 
-- The `mockup/` Vite + Svelte app is for browser review only; **Desktop Head Unit** shows Android Auto from an installed app on a device or emulator, not from `npm run dev` URLs. Production builds for Pages set `VITE_BASE_PATH` so asset URLs work under a repo subpath (`mockup/vite.config.ts`).
-- Android Gradle tasks need a valid Android SDK via `sdk.dir` in `local.properties` (see `local.properties.example`); without it, `assembleDebug` and similar commands fail with SDK location errors.
+## Handoff — next session
+
+| Read first | Why |
+|------------|-----|
+| [`docs/agents/01-prd-and-backlog.md`](docs/agents/01-prd-and-backlog.md) | Backlog + snapshot. |
+| [`docs/agents/06-plugin-template-hotspots.md`](docs/agents/06-plugin-template-hotspots.md) | Where code lives after last pull. |
+| [`docs/agents/07-handoff-plugin-ui-dhu.md`](docs/agents/07-handoff-plugin-ui-dhu.md) | Plugin Android Auto / Media3 + DHU (not PA2 full-app phone scope unless assigned). |
+| [`android-auto-agents/contracts/verification-checklist.md`](android-auto-agents/contracts/verification-checklist.md) | Done bar. |
+
+**Tests:** `PA2_PLUGIN_GRADLE_ROOT=... ./android-auto-agents/scripts/gradle-plugin-template.sh :app:testDebugUnitTest` and `:app:lintDebug` (nested plugin). Mockup: `cd mockup && npm run check`.
+
+**Optional:** `.cursor/hooks/state/continual-learning-index.json` — do not commit secrets.
+
+---
+
+## Shared context (minimal)
+
+- **Root Android module:** **Removed** from this umbrella repo — use **`mockup/`** + nested **plugin** + maintainer **PA2** APK for integration and DHU.
+- **Plugin template:** Separate APK for **plugin + (when implemented) Auto**; clone **`PowerAmpache2PluginTemplate/`**, not **Old**.
+- **DHU:** USB script at repo root — [`02-dhu-and-car-testing.md`](docs/agents/02-dhu-and-car-testing.md).
+- **Auto plugin (research baseline for agents):** The **host** renders browse and now playing; the plugin supplies **Media3** session, **browsable `MediaItem` tree**, metadata, artwork, errors, and voice hooks — not OEM pixel layout. **Phone** product is **[Power-Ampache-2](https://github.com/icefields/Power-Ampache-2)**; mockups must not treat the plugin as a full phone shell. **P0→P3** order and guardrails: [`08-mockup-handoff-package.md`](docs/ux-research/08-mockup-handoff-package.md). **Platform constraints:** [`01-platform-constraint-sheet.md`](docs/ux-research/01-platform-constraint-sheet.md).
+- **Media3 + DHU skip and playlist advance:** Legacy skip/next in Android Auto / DHU come from **intersect**(session `Player.Commands` from `onConnect`, **`player.getAvailableCommands()`**). A single-`MediaItem` Exo pipeline often omits seek-to-next/previous; augment with a **`ForwardingPlayer`** (or equivalent) tied to **app queue** state so controls appear when a next/previous track exists, and handle **`STATE_ENDED`** in the playback engine to **advance the queue** for autoplay (otherwise playback stops between tracks).
+- **Foreground `MediaLibraryService`:** If the system starts the service with **`startForegroundService()`**, call **`startForeground()`** immediately after **`super.onCreate()`**. Doing heavy work first (**`MediaLibrarySession`**, Hilt, **ExoPlayer** init) can exceed the FGS start window and cause **`ForegroundServiceDidNotStartInTimeException`**, breaking **MediaBrowser** / DHU or car host connection.
+- **Learned preferences / facts** — fold into shards when useful; avoid duplicating long lists here (see **Maintaining this document**).
+
+### DHU UI and bug cataloging (agents)
+
+The **Desktop Head Unit** can connect and show host UI while **integration bugs** remain (metadata, browse tree, queue, errors, timing). **Do not assume** the absence of issues just because projection works.
+
+When the human is testing in **DHU**, has mentioned a **DHU session**, or work touches **Android Auto / Media3** behavior:
+
+1. **Prompt them to catalog bugs** before you refactor or “fix” speculatively — ask for a structured pass (even brief): what went wrong, which surface (browse / now playing / voice / errors), repro or frequency, and **severity** (blocker vs polish).
+2. Offer to **capture** that list into [`docs/agents/01-prd-and-backlog.md`](docs/agents/01-prd-and-backlog.md) or a linked issue list **only after** they have dictated or confirmed items — do not invent bug reports.
+3. Prefer **one thread** of fixes per triaged item after the catalog exists, unless they ask for a hotfix.
+
+---
+
+## Updating documentation
+
+When nested clones or behaviour change: update **`docs/agents/01-prd-and-backlog.md`**, **`06-plugin-template-hotspots.md`**, and **root `README.md`** so README does not contradict manifests. Align PR targets (**PowerAmpache2PluginTemplate** vs **Power-Ampache-2**) with the active task.
+
+---
+
+## Rebuild prompt (for you — mockups + UI)
+
+Use this with the team or an agent when restarting UI work:
+
+1. **Pull template fork** — Work from **`PowerAmpache2PluginTemplate/`** on **`plugin/AndroidAuto`**; merge **`upstream/main`** when syncing **icefields**.
+2. **Redraw information architecture** — **Phone / library / now playing** = **Power Ampache 2**; **Plugin** mocks = **Auto / Media3** + explicit plugin entry, not a second full phone shell.
+3. **Implement behind boundaries** — **`app/`** only; drive lists and VM tests with **`domain/.../model/mocks/`** and fakes until product wires real **`MusicFetcher`** / API.
+4. **TDD** — Tests in **`app/src/test`** / **`androidTest`** before expanding production UI.
+5. **DHU** — After car-touched code ships on a branch that registers media, validate per [`02-dhu-and-car-testing.md`](docs/agents/02-dhu-and-car-testing.md).
+6. **Standing loop** — Until presentation-layer ship, follow **§ Presentation shipping loop** (mockup first, periodic maintainer DHU inspection; defer dev APK / real **`MusicFetcher`** / IPC).

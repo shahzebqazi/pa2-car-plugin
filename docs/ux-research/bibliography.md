@@ -1,6 +1,6 @@
 # Annotated bibliography — Android Auto UX research
 
-Access dates reflect when sources were captured for this sandbox package (2026-03-30). Re-verify URLs before release milestones.
+Access dates reflect when sources were captured for this workspace (2026-03-30). Re-verify URLs before release milestones.
 
 ## Platform and quality (normative for implementation)
 

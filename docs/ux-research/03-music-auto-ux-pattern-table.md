@@ -30,12 +30,12 @@ Cross-reference: [01-platform-constraint-sheet.md](01-platform-constraint-sheet.
 
 ---
 
-## Sandbox sample (Car App Library) — not PA2 production
+## Phone vs car APK
 
-The `android-auto` sandbox uses **templates** (`androidx.car.app`), not the PA2 `MediaBrowserService` tree. When comparing mockups:
+This repo has **no** root **`app`** module. **Power-Ampache-2** is the phone product; **PowerAmpache2PluginTemplate** (or PA2) supplies the **Media3** build for **DHU**. When comparing mockups:
 
 - **PA2 Auto:** Pattern column “Host vs app” = mostly **host-rendered** lists and player chrome.
-- **Sandbox:** Custom template screens until replaced by media session browse — label mockups **“exploratory / template prototype”** if they show non-media UI.
+- **Phone frames:** **Phone — PA2 theme** in **`mockup/`**; car frames use **Auto — host media** patterns.
 
 ---
 

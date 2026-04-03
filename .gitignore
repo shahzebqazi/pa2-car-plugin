@@ -16,7 +16,10 @@ captures/
 .idea/
 *.iml
 .DS_Store
-.cursor/
+# Cursor: ignore local state; keep committed project rules under .cursor/rules/
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
 
 # Kotlin
 .kotlin/
@@ -25,9 +28,19 @@ captures/
 *.exec
 jacoco/
 
+# Agent / MCP automation outputs (screenshots, logcat dumps)
+artifacts/
+
+# Local agent / debug scratch (do not commit)
+.adb-auto-test.log
+.bug-hunt-loop.log
+.bug-hunt-screenshots/
+
 # Keystore (never commit)
 *.jks
 *.keystore
 
-# Nested upstream clone (separate git repo). Remove if you track it via submodule.
+# Nested upstream clones (separate git repos). Remove if you track via submodule.
 Power-Ampache-2/
+PowerAmpache2PluginTemplate/
+PowerAmpache2PluginTemplateOld/

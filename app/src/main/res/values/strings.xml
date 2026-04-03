@@ -1,4 +1,0 @@
-<resources>
-    <string name="app_name">Android Auto sample</string>
-    <string name="main_hint">Install on a device or emulator, then use the Desktop Head Unit (DHU) for Android Auto.</string>
-</resources>
