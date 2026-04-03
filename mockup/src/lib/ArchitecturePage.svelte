@@ -1,6 +1,6 @@
 <script lang="ts">
-  import { onMount } from 'svelte'
   import mermaid from 'mermaid'
+  import type { Action } from 'svelte/action'
   import SiteNav from './SiteNav.svelte'
   import type { AppRoute } from './hash-routes'
 
@@ -75,27 +75,38 @@ classDiagram
   note for PluginMediaLibraryService "Host (Gearhead) binds here for Android Auto"
 `
 
-  let systemEl: HTMLDivElement | undefined
-  let classDiagramEl: HTMLDivElement | undefined
-
-  onMount(async () => {
+  let mermaidInited = false
+  function initMermaid(): void {
+    if (mermaidInited) return
     mermaid.initialize({
       startOnLoad: false,
       theme: 'dark',
-      securityLevel: 'strict',
+      securityLevel: 'loose',
       fontFamily: 'ui-sans-serif, system-ui, sans-serif',
     })
-    const id1 = 'mmd-sys-' + Math.random().toString(36).slice(2)
-    const id2 = 'mmd-cls-' + Math.random().toString(36).slice(2)
-    if (systemEl) {
-      const { svg } = await mermaid.render(id1, systemDiagram)
-      systemEl.innerHTML = svg
-    }
-    if (classDiagramEl) {
-      const { svg } = await mermaid.render(id2, classDiagram)
-      classDiagramEl.innerHTML = svg
-    }
-  })
+    mermaidInited = true
+  }
+
+  /** Renders after the node exists — fixes Svelte 5 + bind:this timing vs onMount. */
+  const mermaidChart: Action<HTMLElement, string> = (node, definition) => {
+    initMermaid()
+    const id = `mmd-${Math.random().toString(36).slice(2)}`
+    node.textContent = 'Rendering diagram…'
+    mermaid
+      .render(id, definition.trim())
+      .then(({ svg }) => {
+        node.innerHTML = svg
+      })
+      .catch((err: unknown) => {
+        const msg = err instanceof Error ? err.message : String(err)
+        node.innerHTML = `<pre class="mermaid-error" role="alert">Diagram error: ${escapeHtml(msg)}</pre>`
+      })
+    return {}
+  }
+
+  function escapeHtml(s: string): string {
+    return s.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;')
+  }
 </script>
 
 <div class="arch-page">
@@ -115,7 +126,12 @@ classDiagram
     <section class="arch-section" aria-labelledby="sys-h">
       <h2 id="sys-h">System context</h2>
       <p class="arch-caption">Repositories, Gradle modules, and how Gearhead / DHU attach to the media service.</p>
-      <div class="mermaid-wrap" bind:this={systemEl} role="img" aria-label="System context diagram"></div>
+      <div
+        class="mermaid-wrap"
+        use:mermaidChart={systemDiagram}
+        role="img"
+        aria-label="System context diagram"
+      ></div>
     </section>
 
     <section class="arch-section" aria-labelledby="uml-h">
@@ -124,7 +140,12 @@ classDiagram
         Primary types in <code>app/</code> for phone shell + <code>PluginMediaLibraryService</code> for Android Auto. IPC
         via <code>PA2DataFetchService</code> when the host app feeds catalog data (product scope).
       </p>
-      <div class="mermaid-wrap" bind:this={classDiagramEl} role="img" aria-label="UML class diagram"></div>
+      <div
+        class="mermaid-wrap"
+        use:mermaidChart={classDiagram}
+        role="img"
+        aria-label="UML class diagram"
+      ></div>
     </section>
   </main>
 </div>
@@ -191,15 +212,26 @@ classDiagram
   }
 
   .mermaid-wrap {
+    min-height: 120px;
     overflow-x: auto;
     padding: 16px 12px;
     border-radius: 12px;
     border: 1px solid var(--mock-chrome-border);
     background: var(--pa2-surface-container);
+    font-size: 0.75rem;
+    color: var(--pa2-on-surface-variant);
   }
 
   .mermaid-wrap :global(svg) {
     max-width: 100%;
     height: auto;
+  }
+
+  .mermaid-wrap :global(pre.mermaid-error) {
+    margin: 0;
+    white-space: pre-wrap;
+    word-break: break-word;
+    color: var(--pa2-error, #f593ab);
+    font-size: 0.78rem;
   }
 </style>
