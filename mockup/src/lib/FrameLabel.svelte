@@ -1,15 +1,27 @@
 <script lang="ts">
-  /** Phone mockups use PA2 primary on the badge; Auto mockups use neutral chrome so reviewers do not read teal as “car UI branding”. */
+  /**
+   * Phone: PA2 badge.
+   * Auto: neutral badge (host-only chrome mental model).
+   * Auto + PA2: teal badge — use for DHU targets where we show PA2 identity via session, artwork, and accent (real AA still host-rendered).
+   */
   interface Props {
     label: string
     note?: string
-    surface?: 'phone' | 'auto'
+    surface?: 'phone' | 'auto' | 'auto-pa2'
   }
   let { label, note = '', surface = 'phone' }: Props = $props()
 </script>
 
-<div class="frame-label" class:frame-label--auto={surface === 'auto'} role="status">
-  <span class="badge" class:badge--auto={surface === 'auto'}>{label}</span>
+<div
+  class="frame-label"
+  class:frame-label--auto={surface === 'auto'}
+  class:frame-label--auto-pa2={surface === 'auto-pa2'}
+  role="status"
+>
+  <span
+    class="badge"
+    class:badge--auto={surface === 'auto'}
+    class:badge--auto-pa2={surface === 'auto-pa2'}>{label}</span>
   {#if note}
     <span class="note">{note}</span>
   {/if}
@@ -31,6 +43,11 @@
     border-bottom-color: #3a3a3a;
   }
 
+  .frame-label--auto-pa2 {
+    background: rgba(18, 24, 22, 0.92);
+    border-bottom-color: var(--auto-hu-border, rgba(112, 204, 204, 0.25));
+  }
+
   .badge {
     font-size: 0.7rem;
     font-weight: 700;
@@ -43,6 +60,10 @@
     color: #b8bdc0;
   }
 
+  .badge--auto-pa2 {
+    color: var(--pa2-primary, #70cccc);
+  }
+
   .note {
     font-size: 0.75rem;
     color: var(--pa2-on-surface-variant, #cbced1);
@@ -52,5 +73,9 @@
 
   .frame-label--auto .note {
     color: #c8cdd0;
+  }
+
+  .frame-label--auto-pa2 .note {
+    color: var(--pa2-on-surface-variant, #cbced1);
   }
 </style>

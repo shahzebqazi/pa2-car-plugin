@@ -1,21 +1,23 @@
 /** Mockup frame ids (sidebar + stage). Home is a separate route, not a frame. */
 export type MockupFrameId =
-  | 'phone-np'
-  | 'phone-browse'
-  | 'phone-queue'
-  | 'phone-error'
+  | 'auto-browse-playlists'
+  | 'auto-browse-recommended'
+  | 'auto-browse-recents'
+  | 'auto-browse-frequent'
+  | 'auto-browse-new'
   | 'auto-np'
-  | 'auto-browse'
+  | 'auto-queue'
   | 'auto-error'
 
 export const MOCKUP_FRAMES: readonly MockupFrameId[] = [
-  'phone-np',
+  'auto-browse-playlists',
+  'auto-browse-recommended',
+  'auto-browse-recents',
+  'auto-browse-frequent',
+  'auto-browse-new',
   'auto-np',
-  'phone-browse',
-  'auto-browse',
-  'phone-error',
+  'auto-queue',
   'auto-error',
-  'phone-queue',
 ] as const
 
 export function isMockupFrameId(s: string): s is MockupFrameId {

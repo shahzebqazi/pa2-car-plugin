@@ -1,26 +1,25 @@
 <script lang="ts">
-  import PhoneNowPlaying from './lib/PhoneNowPlaying.svelte'
-  import PhoneBrowseRoot from './lib/PhoneBrowseRoot.svelte'
-  import PhoneQueue from './lib/PhoneQueue.svelte'
-  import PhoneErrorState from './lib/PhoneErrorState.svelte'
   import AutoNowPlaying from './lib/AutoNowPlaying.svelte'
-  import AutoBrowseRoot from './lib/AutoBrowseRoot.svelte'
+  import AutoBrowseSection from './lib/AutoBrowseSection.svelte'
+  import AutoQueue from './lib/AutoQueue.svelte'
   import AutoErrorState from './lib/AutoErrorState.svelte'
   import HomePage from './lib/HomePage.svelte'
   import DesignSystemPage from './lib/DesignSystemPage.svelte'
   import ResearchPage from './lib/ResearchPage.svelte'
   import SiteNav from './lib/SiteNav.svelte'
   import { parseHash, type AppRoute } from './lib/hash-routes'
+  import { browseSectionFromFrame, isAutoBrowseFrameId } from './lib/browse-section'
   import type { MockupFrameId } from './lib/screen-ids'
 
   const frames: { id: MockupFrameId; label: string }[] = [
-    { id: 'phone-np', label: 'P0 · Phone · Now playing' },
-    { id: 'auto-np', label: 'P0 · Car screen · Now playing' },
-    { id: 'phone-browse', label: 'P1 · Phone · Library' },
-    { id: 'auto-browse', label: 'P1 · Car screen · Library' },
-    { id: 'phone-error', label: 'P2 · Phone · Can’t connect' },
-    { id: 'auto-error', label: 'P2 · Car screen · Can’t connect' },
-    { id: 'phone-queue', label: 'P3 · Phone · Up next' },
+    { id: 'auto-browse-playlists', label: 'Browse · Playlists' },
+    { id: 'auto-browse-recommended', label: 'Browse · Recommended' },
+    { id: 'auto-browse-recents', label: 'Browse · Recents' },
+    { id: 'auto-browse-frequent', label: 'Browse · Frequently played' },
+    { id: 'auto-browse-new', label: 'Browse · Newly added' },
+    { id: 'auto-np', label: 'Now playing' },
+    { id: 'auto-queue', label: 'Up next (queue)' },
+    { id: 'auto-error', label: 'Can’t connect (error)' },
   ]
 
   let route = $state<AppRoute>(parseHash(typeof window !== 'undefined' ? window.location.hash : ''))
@@ -54,12 +53,11 @@
 
     <div class="mockup-body">
       <aside class="mockup-meta" aria-label="Mockup list">
-        <h1 class="app-title">Screen mockups</h1>
+        <h1 class="app-title">Android Auto mockups</h1>
         <p class="app-lead">
-          <strong>Phone</strong> frames use PA2 theme (Nunito and colors from <code>docs/design-system/</code>).
-          <strong>Car</strong> frames approximate <strong>host-rendered</strong> Android Auto: the head unit owns layout
-          and styling; the app supplies the media tree and session. Gray chrome here is deliberate. Scenario order
-          P0–P3 follows <code>docs/ux-research/08-mockup-handoff-package.md</code>.
+          <strong>Plugin / Media3</strong> only — browse surfaces the host renders from your <code>MediaItem</code> tree.
+          Handheld UI lives in <strong>Power-Ampache-2</strong>; this site does not ship phone frames. PA2 accents + ~56px
+          targets illustrate product identity and driving ergonomics — production AA remains <strong>host-rendered</strong>.
         </p>
         <nav class="chips" aria-label="Mockup frames">
           {#each frames as f}
@@ -74,26 +72,20 @@
           {/each}
         </nav>
         <p class="dhu-note">
-          The <strong>Desktop Head Unit</strong> runs the real Kotlin sample app from this repo (not this website).
-          The hero image on the home page is an optional screenshot from that setup; see <code>mockup/README.md</code>
-          if you want to refresh it.
+          Install the <strong>plugin template</strong> debug APK for real DHU sessions (see <code>AGENTS.md</code>). This
+          page is a browser mockup only. The home hero image is optional; see <code>mockup/README.md</code>
+          to refresh it.
         </p>
       </aside>
 
       <main class="mockup-stage" aria-label="Selected mockup">
-        <div class="mockup-viewport">
-          {#if route.frame === 'phone-np'}
-            <PhoneNowPlaying />
-          {:else if route.frame === 'phone-browse'}
-            <PhoneBrowseRoot />
-          {:else if route.frame === 'phone-queue'}
-            <PhoneQueue />
-          {:else if route.frame === 'phone-error'}
-            <PhoneErrorState />
+        <div class="mockup-viewport mockup-viewport--wide">
+          {#if isAutoBrowseFrameId(route.frame)}
+            <AutoBrowseSection section={browseSectionFromFrame(route.frame)} />
           {:else if route.frame === 'auto-np'}
             <AutoNowPlaying />
-          {:else if route.frame === 'auto-browse'}
-            <AutoBrowseRoot />
+          {:else if route.frame === 'auto-queue'}
+            <AutoQueue />
           {:else if route.frame === 'auto-error'}
             <AutoErrorState />
           {/if}
@@ -166,7 +158,6 @@
     }
   }
 
-  /* One preview width for phone and car; scroll if the phone frame is taller than the cap. */
   .mockup-viewport {
     --mockup-slot-w: min(100%, 380px);
     width: var(--mockup-slot-w);
@@ -186,7 +177,11 @@
     --car-display-max-w: 100%;
   }
 
-  .mockup-viewport :global(.phone-shell),
+  .mockup-viewport--wide {
+    --mockup-slot-w: min(100%, 520px);
+    max-height: min(78svh, 580px);
+  }
+
   .mockup-viewport :global(.auto-shell) {
     width: 100%;
     max-width: 100% !important;

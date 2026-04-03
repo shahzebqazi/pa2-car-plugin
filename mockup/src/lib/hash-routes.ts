@@ -6,9 +6,9 @@ export type AppRoute =
   | { name: 'research' }
   | { name: 'mockup'; frame: MockupFrameId }
 
-const DEFAULT_MOCKUP_FRAME: MockupFrameId = 'phone-np'
+const DEFAULT_MOCKUP_FRAME: MockupFrameId = 'auto-browse-playlists'
 
-/** Parse `location.hash` (e.g. `#/`, `#/design`, `#/mockup/phone-np`). */
+/** Parse `location.hash` (e.g. `#/`, `#/design`, `#/mockup/auto-np`). */
 export function parseHash(hash: string): AppRoute {
   const raw = hash.replace(/^#/, '').replace(/^\//, '').trim()
   if (!raw) return { name: 'home' }

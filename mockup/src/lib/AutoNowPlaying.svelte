@@ -4,15 +4,16 @@
 
 <div class="auto-shell">
   <FrameLabel
-    surface="auto"
-    label="Auto — host media (PA2)"
-    note="Host-rendered pattern only: gray chrome, not PA2 brand colors. Wave behind the scrubber is exploratory; it turns off under prefers-reduced-motion. OEMs control real layout and scrub appearance."
+    surface="auto-pa2"
+    label="Auto — PA2 session (DHU)"
+    note="Large transport targets (≥56px) and glanceable metadata. Host sets final layout; Media3 supplies artwork, title, actions, and position. Wave behind the scrubber is optional; off when prefers-reduced-motion."
   />
   <div class="auto-screen">
     <div class="np">
       <div class="np-art" role="img" aria-label="Album artwork"></div>
       <div class="np-maincol">
         <div class="np-center">
+          <p class="np-kicker">Now playing</p>
           <p class="np-title">Midnight City</p>
           <p class="np-sub">M83 · Hurry Up, We're Dreaming</p>
         </div>
@@ -50,6 +51,10 @@
             </div>
           </div>
         </div>
+        <div class="np-secondary" aria-label="Extra controls">
+          <button type="button" class="np-aux" aria-label="Shuffle off">🔀</button>
+          <button type="button" class="np-aux" aria-label="Repeat all">🔁</button>
+        </div>
       </div>
       <div class="np-controls">
         <button type="button" class="np-btn" aria-label="Previous">|◀</button>
@@ -68,15 +73,16 @@
     margin: 0 auto;
     border-radius: 12px;
     overflow: hidden;
-    border: 1px solid #444;
-    background: #1a1a1a;
+    border: 1px solid var(--auto-hu-border);
+    background: var(--auto-hu-bg);
     box-shadow: 0 16px 40px rgba(0, 0, 0, 0.5);
+    font-family: 'Nunito', system-ui, sans-serif;
   }
   .auto-screen {
     width: 100%;
     aspect-ratio: var(--car-aspect-ratio, 16 / 9);
     padding: clamp(12px, 2.5vw, 24px) clamp(16px, 3vw, 36px);
-    background: linear-gradient(180deg, #2a2a2a 0%, #1e1e1e 100%);
+    background: linear-gradient(165deg, rgba(112, 204, 204, 0.08) 0%, var(--auto-hu-bg) 45%, #0e1010 100%);
     display: flex;
     align-items: center;
     box-sizing: border-box;
@@ -92,12 +98,13 @@
   }
   .np-art {
     flex-shrink: 0;
-    width: clamp(96px, 18vw, 200px);
+    width: clamp(104px, 18vw, 220px);
     aspect-ratio: 1;
     max-height: 100%;
-    border-radius: 10px;
-    background: linear-gradient(145deg, #3a3a3a, #252525);
-    border: 1px solid #555;
+    border-radius: 14px;
+    background: linear-gradient(145deg, rgba(112, 204, 204, 0.25), var(--auto-hu-surface-elevated));
+    border: 1px solid var(--auto-hu-border);
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.35);
   }
   .np-maincol {
     flex: 1;
@@ -110,21 +117,27 @@
   .np-center {
     text-align: left;
   }
+  .np-kicker {
+    margin: 0 0 4px;
+    font-size: 0.72rem;
+    font-weight: 800;
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    color: var(--auto-hu-accent);
+  }
   .np-title {
     margin: 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: clamp(1.05rem, 2.6vw, 1.55rem);
-    font-weight: 600;
-    color: #fff;
+    font-size: clamp(1.15rem, 2.8vw, 1.75rem);
+    font-weight: 800;
+    color: var(--auto-hu-text);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
   }
   .np-sub {
-    margin: 4px 0 0;
-    font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    font-size: clamp(0.8rem, 1.9vw, 1rem);
-    color: #bbb;
+    margin: 6px 0 0;
+    font-size: clamp(0.85rem, 1.9vw, 1.05rem);
+    color: var(--auto-hu-muted);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -135,24 +148,24 @@
   .np-seek.hit {
     display: flex;
     flex-direction: column;
-    gap: 6px;
-    padding: 6px 8px;
-    border-radius: 10px;
-    border: 1px solid rgba(255, 255, 255, 0.08);
-    background: rgba(0, 0, 0, 0.2);
+    gap: 8px;
+    padding: 10px 12px;
+    border-radius: 14px;
+    border: 1px solid var(--auto-hu-border);
+    background: rgba(0, 0, 0, 0.25);
     cursor: pointer;
   }
   .np-seek:focus-visible {
-    outline: 2px solid #fff;
+    outline: 2px solid var(--auto-hu-focus);
     outline-offset: 2px;
   }
   .np-wave-viz {
     position: relative;
-    height: clamp(32px, 5vw, 40px);
-    border-radius: 6px;
+    height: clamp(36px, 5vw, 44px);
+    border-radius: 8px;
     overflow: hidden;
     background: rgba(0, 0, 0, 0.35);
-    border: 1px solid rgba(255, 255, 255, 0.06);
+    border: 1px solid var(--auto-hu-border);
   }
   .np-wave-svg {
     display: block;
@@ -160,19 +173,19 @@
     height: 100%;
   }
   .np-wave-back {
-    fill: rgba(255, 255, 255, 0.08);
+    fill: rgba(112, 204, 204, 0.12);
   }
   .np-wave-front {
-    fill: rgba(255, 255, 255, 0.18);
+    fill: rgba(112, 204, 204, 0.22);
   }
   .np-wave-progress {
     position: absolute;
     left: 0;
     top: 0;
     bottom: 0;
-    background: linear-gradient(90deg, rgba(200, 200, 200, 0.2), transparent);
+    background: linear-gradient(90deg, rgba(112, 204, 204, 0.35), transparent);
     pointer-events: none;
-    border-right: 2px solid #c8c8c8;
+    border-right: 3px solid var(--auto-hu-accent);
     box-sizing: border-box;
   }
   @media (prefers-reduced-motion: no-preference) {
@@ -196,76 +209,98 @@
   .np-progress {
     display: flex;
     align-items: center;
-    gap: 10px;
+    gap: 12px;
     max-width: 100%;
   }
   .np-time {
-    font-family: system-ui, sans-serif;
-    font-size: clamp(0.7rem, 1.4vw, 0.85rem);
+    font-size: clamp(0.75rem, 1.4vw, 0.88rem);
     font-variant-numeric: tabular-nums;
-    color: #999;
+    color: var(--auto-hu-muted);
     flex-shrink: 0;
   }
   .np-bar {
     position: relative;
     flex: 1;
-    height: 5px;
-    border-radius: 3px;
-    background: #444;
+    height: 6px;
+    border-radius: 4px;
+    background: rgba(255, 255, 255, 0.12);
     overflow: visible;
-    min-width: 48px;
+    min-width: 64px;
   }
   .np-fill {
     width: 32%;
     height: 100%;
-    background: #c8c8c8;
-    border-radius: 3px;
+    background: linear-gradient(90deg, var(--auto-hu-accent), #8fd9d9);
+    border-radius: 4px;
   }
   .np-knob {
     position: absolute;
     top: 50%;
-    width: 12px;
-    height: 12px;
-    margin-left: -6px;
-    margin-top: -6px;
+    width: 16px;
+    height: 16px;
+    margin-left: -8px;
+    margin-top: -8px;
     border-radius: 50%;
-    background: #eee;
-    border: 2px solid #c8c8c8;
-    box-shadow: 0 1px 4px rgba(0, 0, 0, 0.4);
+    background: var(--pa2-on-primary);
+    border: 2px solid var(--auto-hu-accent);
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.45);
+  }
+  .np-secondary {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+  }
+  .np-aux {
+    min-width: var(--auto-min-hit);
+    min-height: 48px;
+    padding: 0 16px;
+    border-radius: 12px;
+    border: 1px solid var(--auto-hu-border);
+    background: var(--auto-hu-surface-elevated);
+    color: var(--auto-hu-text);
+    font-size: 1.1rem;
+    font-family: inherit;
+  }
+  .np-aux:focus-visible {
+    outline: 2px solid var(--auto-hu-focus);
+    outline-offset: 2px;
   }
   .np-controls {
     display: flex;
     flex-shrink: 0;
-    gap: clamp(8px, 1.5vw, 16px);
+    gap: clamp(10px, 1.8vw, 18px);
     align-items: center;
   }
   .np-btn {
-    min-width: 48px;
-    min-height: 48px;
-    padding: 0 14px;
-    border: none;
-    border-radius: 8px;
-    background: #3a3a3a;
-    color: #eee;
-    font-size: 0.85rem;
-    font-family: system-ui, sans-serif;
+    min-width: var(--auto-min-hit);
+    min-height: var(--auto-min-hit);
+    padding: 0 16px;
+    border: 1px solid var(--auto-hu-border);
+    border-radius: 14px;
+    background: var(--auto-hu-surface-elevated);
+    color: var(--auto-hu-text);
+    font-size: 0.95rem;
+    font-weight: 700;
+    font-family: inherit;
   }
   .np-btn.np-main {
-    min-width: 64px;
-    min-height: 56px;
-    background: #e0e0e0;
-    color: #111;
-    font-weight: 700;
+    min-width: 72px;
+    min-height: 72px;
+    border-radius: 18px;
+    background: var(--auto-hu-accent);
+    color: var(--pa2-on-primary);
+    border-color: rgba(112, 204, 204, 0.65);
+    font-size: 1.05rem;
+    box-shadow: 0 8px 20px rgba(112, 204, 204, 0.2);
   }
   .np-btn:focus-visible {
-    outline: 2px solid #fff;
-    outline-offset: 2px;
+    outline: 2px solid var(--auto-hu-focus);
+    outline-offset: 3px;
   }
-  /* Narrow shell: drop fixed 16:9 (was clipping) and stack now playing like a portrait HU. */
   @container (max-width: 520px) {
     .auto-screen {
       aspect-ratio: unset;
-      min-height: 320px;
+      min-height: 360px;
     }
     .np {
       flex-wrap: wrap;
@@ -285,6 +320,9 @@
     .np-controls {
       order: 3;
       width: 100%;
+      justify-content: center;
+    }
+    .np-secondary {
       justify-content: center;
     }
   }

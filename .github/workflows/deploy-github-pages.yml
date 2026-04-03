@@ -32,6 +32,7 @@ jobs:
           VITE_BASE_PATH: /pa2-car-plugin
         run: |
           npm ci
+          npm run check
           npm run build
 
       - uses: actions/upload-pages-artifact@v3

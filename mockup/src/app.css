@@ -20,6 +20,18 @@
   --car-display-max-w: 1120px;
   --car-aspect-ratio: 16 / 9;
 
+  /* DHU / Auto mockup shells — PA2 accents on top of dark host-like base (session + metadata identity). */
+  --auto-hu-bg: #141816;
+  --auto-hu-surface: #1e2321;
+  --auto-hu-surface-elevated: #252a28;
+  --auto-hu-border: rgba(112, 204, 204, 0.2);
+  --auto-hu-text: var(--pa2-on-surface);
+  --auto-hu-muted: var(--pa2-on-surface-variant);
+  --auto-hu-accent: var(--pa2-primary);
+  --auto-hu-accent-soft: rgba(112, 204, 204, 0.14);
+  --auto-hu-focus: var(--pa2-tertiary);
+  --auto-min-hit: 56px;
+
   font-family: 'Nunito', system-ui, sans-serif;
   font-synthesis: none;
   text-rendering: optimizeLegibility;

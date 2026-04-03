@@ -110,8 +110,8 @@
         <span class="chevron" aria-hidden="true"></span>
       </summary>
       <p class="phone-lead">
-        Use for the handheld app and for <strong>Phone — PA2 theme</strong> mockup frames. Not for projected Android
-        Auto chrome.
+        Use for the handheld app in <strong>Power-Ampache-2</strong>. Not for projected Android Auto chrome (mockups here
+        are Auto / plugin only).
       </p>
       <div class="type-sample">
         <h3 class="type-label">Typography</h3>

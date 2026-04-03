@@ -13,7 +13,7 @@
       {#if !heroFailed}
         <img
           src={heroSrc}
-          alt="Android Auto now playing, captured from the Desktop Head Unit while running this repo’s sample app"
+          alt="Android Auto now playing from the Desktop Head Unit — install a Media3 car-capable APK (e.g. PowerAmpache2PluginTemplate or Power-Ampache-2)"
           class="hero-img"
           width="1920"
           height="1080"
@@ -34,11 +34,11 @@
     <h1 class="title">Power Ampache 2 × Android Auto</h1>
 
     <p class="overview">
-      UX research, browser mockups, and a Kotlin <strong>Car App Library</strong> sample under <code>app/</code> for
-      experiments. <strong>Production Power Ampache 2</strong> on Android Auto is <strong>host-rendered media</strong>
-      via <strong>Media3</strong> (session, browse tree, metadata) — not custom car templates. The
-      <a class="overview-link" href="#/design">Auto design</a> page states what engineers implement versus what lives on
-      the phone only.
+      UX research and <strong>browser mockups</strong> for the <strong>Android Auto plugin</strong>
+      (<code>PowerAmpache2PluginTemplate</code>): <strong>Media3</strong> browse — playlists, recommended, recents,
+      frequently played, newly added — plus session, queue, and errors for the <strong>host</strong>. The full handheld app is
+      <strong>Power-Ampache-2</strong> — not mocked here. Validate car behaviour on a device with <strong>DHU</strong>.
+      The <a class="overview-link" href="#/design">Auto design</a> page covers platform rules and PA2 identity notes.
     </p>
 
     <nav class="nav" aria-label="Site sections">

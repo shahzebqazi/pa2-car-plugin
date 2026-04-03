@@ -61,6 +61,8 @@ High-level areas (conceptual; confirm against current nav graph):
 - **Desktop Head Unit:** Development; document **input** and **latency** differences vs real HU ([Testing](https://developer.android.com/training/cars/testing)).
 - **Automotive OS:** Same **media** architecture for audio path; verify **AAOS**-specific quality checklist items at release time.
 
-## Sandbox sample (Car App Library)
+## Now playing (mockup reference)
 
-The `android-auto` project uses **templates** (`androidx.car.app`) — **different** layout model from PA2 production. Label any mockup from that code as **template prototype**, not PA2 Auto UI.
+**Host-rendered** Android Auto remains **different** from handheld UI. The **`mockup/`** site is **plugin / Auto only** (no phone frames); handheld now playing lives in **Power-Ampache-2**.
+
+**`AutoNowPlaying.svelte`:** Host-like **now playing** preview with PA2 accents for review — **metadata**, **seek** row (**~48dp** surface intent), **transport**. Placeholder duration **243 s** (4:03). **`mockup/`** is a browser reference for car hierarchy, not OEM pixels.
