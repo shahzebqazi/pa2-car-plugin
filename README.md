@@ -1,5 +1,7 @@
 # Android Auto workspace (Power Ampache 2 — full car stack)
 
+> **Deprecated:** This repository has been folded into [`PowerAmpache2PluginTemplate`](https://github.com/shahzebqazi/PowerAmpache2PluginTemplate) as the `mockup` branch. It is kept temporarily as a pointer and will be deleted eventually.
+
 **AI agent pack (roles, workflows, MCP stubs):** [`android-auto-agents/`](android-auto-agents/) — companion to [`AGENTS.md`](AGENTS.md) and [`docs/agents/`](docs/agents/README.md) (sharded PRD, DHU, mockup rules).
 
 This repository supports **Power Ampache 2 on Android Auto** through **Media3**-style integration: **`MediaSession`** + **`MediaSessionService`**, media-browser manifest wiring, a browsable **`MediaItem`** tree (per [Google’s media-for-cars](https://developer.android.com/training/cars/media) contract), metadata, artwork, errors, and voice. **How much browse appears on the head unit** depends on what the **installed media APK** implements (**Power-Ampache-2**, **PowerAmpache2PluginTemplate** plugin, or another build) — see **`docs/ux-research/01-platform-constraint-sheet.md`** (code-scan caveat). UX research, the **design system**, **`mockup/`** (Svelte), and **`AGENTS.md`** describe the **host-rendered** car path and the companion **phone** experience.
